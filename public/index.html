@@ -1895,7 +1895,7 @@
               <div class="card-action-btns">
                 ${p.github_url ? `<a href="${p.github_url}" target="_blank" class="pill-link-btn btn-github-outline" onclick="event.stopPropagation()">GitHub ↗</a>` : ''}
                 ${p.live_url ? `<a href="${p.live_url}" target="_blank" rel="noopener" class="pill-link-btn btn-live-terracotta" onclick="event.stopPropagation()">${p.live_label ? 'Demo ↗' : 'Live Web ↗'}</a>` : ''}
-                ${!p.github_url && !p.live_url && p.link_note ? `<span class="card-link-note">Repo privat</span>` : ''}
+                ${!p.github_url && !p.live_url && p.link_note ? `<span class="card-link-note">${p.stage_badge ? 'Belum dirilis' : 'Repo privat'}</span>` : ''}
               </div>
             </div>
           </div>

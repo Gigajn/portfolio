@@ -113,7 +113,7 @@
       "/screenshots/tiktok_judol_analytics.png"
     ],
     "live_url": "",
-    "github_url": "",
+    "github_url": "https://github.com/Gigajn/TT_Scrapper",
     "features": [
       "Web scraper headless dengan teknik anti-bot stealth patches untuk memanen komentar video TikTok",
       "Preprocessing teks bahasa Indonesia: pembersihan emotikon, tautan mencurigakan, dan normalisasi slang",
@@ -153,7 +153,7 @@
       "Pencatatan riwayat kondisi tanaman dan perkiraan faktor risiko cuaca"
     ],
     "architecture": "Aplikasi Android berkomunikasi dengan backend API untuk memproses foto tanaman dan mengembalikan hasil deteksi penyakit beserta saran perawatannya.",
-    "link_note": "Repositori masih privat selama tahap pengembangan.",
+    "link_note": "Kode dan demo belum dipublikasikan karena aplikasi masih dalam pengembangan.",
     "stage_note": "Model deteksi penyakit daun padi masih dilatih dan diuji, aplikasi Android masih dikembangkan."
   },
   {
@@ -175,7 +175,7 @@
       "/screenshots/dairy_apps.png"
     ],
     "live_url": "",
-    "github_url": "",
+    "github_url": "https://github.com/Gigajn/lifeChapter_dairy",
     "features": [
       "Pencatatan jurnal harian cerdas dengan tracking mood emosional interaktif",
       "Pengubahan catatan mentah menjadi narasi cerita yang berkesan menggunakan prompt AI personal",
@@ -235,7 +235,7 @@
       "/screenshots/sig_desa_resident_portal.png"
     ],
     "live_url": "",
-    "github_url": "",
+    "github_url": "https://github.com/Gigajn/Desa-SIG",
     "features": [
       "Arsitektur multi-tenant berbasis host: setiap desa memiliki data spasial terpisah",
       "Editor geometri PostGIS untuk batas Dusun, RW, dan RT dengan validasi topologi",
@@ -390,7 +390,7 @@
       "/screenshots/split_downloader_editor.png"
     ],
     "live_url": "",
-    "github_url": "",
+    "github_url": "https://github.com/Gigajn/yt_splitDownloader",
     "features": [
       "Unduh video dan audio YouTube dalam berbagai opsi resolusi dan bitrate kualitas tinggi",
       "Pemotong audio otomatis (Track Splitter) berdasarkan daftar timestamp di deskripsi video/komentar",
