@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gigajn — Engineering Portfolio</title>
+  <title>Gigajn — Portofolio Machine Learning & AI Engineer</title>
+  <meta name="description" content="Portofolio Gigajn: proyek Machine Learning, NLP, computer vision, dan sistem multi-agent LLM, lengkap dengan kode sumber dan demo.">
+  <meta property="og:title" content="Gigajn — Portofolio Machine Learning & AI Engineer">
+  <meta property="og:description" content="Proyek AI terapan: deep learning, machine learning, NLP, computer vision, dan LLM agents.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1334,15 +1338,62 @@
       text-decoration: underline;
     }
 
+    /* Hero CTA row */
+    .hero-cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-outline-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px; border-radius: var(--radius-full);
+      border: 1.5px solid var(--text-main); color: var(--text-main);
+      font-weight: 700; font-size: 0.95rem; text-decoration: none;
+      background: rgba(255,255,255,0.6); transition: all 0.2s ease;
+    }
+    .btn-outline-pill:hover { background: var(--text-main); color: #fff; }
+    .nav-actions { display: flex; gap: 8px; align-items: center; }
+
+    /* Competencies */
+    .skills-grid {
+      max-width: 1240px; margin: 0 auto 24px; padding: 0 24px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .skill-card {
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: var(--radius-lg); padding: 26px;
+      box-shadow: 0 16px 40px -18px rgba(18,38,25,0.18);
+    }
+    .skill-card h3 { color: var(--text-main); font-size: 1.08rem; font-weight: 800; margin-bottom: 6px; }
+    .skill-card p { font-size: 0.92rem; margin-bottom: 14px; }
+
+    /* Contact */
+    .contact-band {
+      max-width: 1240px; margin: 32px auto 0; padding: 40px 32px;
+      text-align: center; border-radius: var(--radius-card);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+    .contact-band h2 { color: var(--text-main); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.8px; margin-bottom: 8px; }
+    .contact-band p { max-width: 640px; margin: 0 auto 22px; }
+    .contact-band .hero-cta-row { justify-content: center; }
+    .card-link-note { font-size: 0.78rem; color: var(--text-muted); font-style: italic; }
+
     /* Responsive */
     @media (max-width: 840px) {
       .hero-glass-container {
         padding: 32px 24px;
       }
+      .hero-top-wrapper { padding: 16px 16px 28px; }
       .hero-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 36px;
       }
+      .hero-left, .hero-right-visual { min-width: 0; }
+      .hero-right-visual { flex-direction: column; align-items: stretch; }
+      .terminal-status-indicator { display: none; }
+      .hero-main-title { font-size: 2.3rem; letter-spacing: -1px; }
+      .terminal-code-body { overflow-wrap: anywhere; }
+      .hero-cta-row > * { flex: 1 1 auto; justify-content: center; }
       .hero-right-visual {
         min-height: 300px;
       }
@@ -1361,6 +1412,9 @@
         border-radius: var(--radius-lg);
         gap: 12px;
       }
+      .skills-grid { grid-template-columns: 1fr; padding: 0 16px; }
+      .contact-band { margin: 32px 16px 0; padding: 32px 20px; }
+      .nav-tabs-island { flex-wrap: wrap; justify-content: center; }
       .projects-grid-area {
         grid-template-columns: 1fr;
         padding: 0 16px 64px;
@@ -1389,42 +1443,51 @@
 
     <!-- Floating Island Navbar (VisionOS Frosted Glass) -->
     <nav class="nav-island-container">
-      <a href="/" class="brand-island">
+      <a href="./" class="brand-island">
         <div class="brand-pebble">🦀</div>
         <span class="brand-name">Gigajn</span>
       </a>
 
       <div class="nav-tabs-island">
-        <button class="tab-btn active" data-filter="all">Semua (14)</button>
-        <button class="tab-btn" data-filter="fullstack">Fullstack</button>
+        <button class="tab-btn active" data-filter="all">Semua</button>
         <button class="tab-btn" data-filter="ai">AI & ML</button>
+        <button class="tab-btn" data-filter="fullstack">Fullstack</button>
         <button class="tab-btn" data-filter="mobile">Mobile</button>
         <button class="tab-btn" data-filter="systems">Systems</button>
       </div>
 
-      <a href="https://github.com/Gigajn" target="_blank" class="btn-island-action" title="Buka Profil GitHub Gigajn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+      <div class="nav-actions">
+        <a href="https://www.linkedin.com/in/gigajdn" target="_blank" rel="noopener" class="btn-island-action" title="Profil LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://github.com/Gigajn" target="_blank" rel="noopener" class="btn-island-action" title="Profil GitHub">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
         </svg>
-        <span>github.com/Gigajn</span>
-      </a>
+          <span>GitHub</span>
+        </a>
+      </div>
     </nav>
 
     <!-- Hero Frosted Glass Container -->
     <div class="hero-glass-container">
       <div class="hero-content">
         <div class="hero-left">
-          <div class="micro-pill-badge">• SOFTWARE & SYSTEMS ARCHITECTURE</div>
+          <div class="micro-pill-badge">• MACHINE LEARNING · AI ENGINEERING</div>
           <h1 class="hero-main-title">
-            Software Engineer &<br>
-            <strong>Systems Portfolio.</strong>
+            Machine Learning &<br>
+            <strong>AI Engineer.</strong>
           </h1>
           <p class="hero-description">
-            Koleksi proyek pengembangan perangkat lunak mencakup sistem enterprise, aplikasi mobile, model kecerdasan buatan, dan perkakas komputasi. Setiap proyek terhubung langsung ke repositori kode sumber di GitHub.
+            Saya membangun solusi AI terapan dari data hingga produk: model klasifikasi, NLP bahasa Indonesia, computer vision, dan sistem multi-agent berbasis LLM, lengkap dengan aplikasi web, mobile, dan backend yang siap dipakai pengguna. Setiap proyek di bawah terhubung ke kode sumber atau demonya.
           </p>
-          <button class="btn-explore-works" onclick="scrollToGrid()">
-            <span>Jelajahi Seluruh Karya ↓</span>
-          </button>
+          <div class="hero-cta-row">
+            <button class="btn-explore-works" onclick="scrollToGrid()">
+              <span>Lihat Proyek ↓</span>
+            </button>
+            <a class="btn-outline-pill" href="https://www.linkedin.com/in/gigajdn" target="_blank" rel="noopener">Hubungi via LinkedIn ↗</a>
+          </div>
         </div>
 
         <!-- Hero Right Visual: Systems Terminal -->
@@ -1444,35 +1507,35 @@
               </div>
             </div>
             <div class="terminal-code-body">
-              <div class="code-line"><span class="cmd-prompt">❯</span> <span class="cmd-text">git status</span></div>
+              <div class="code-line"><span class="cmd-prompt">❯</span> <span class="cmd-text">cat profil.toml</span></div>
               <div class="code-output">
-                <span class="code-key">Branch</span>: <span class="code-val">main (up to date)</span><br>
-                <span class="code-key">Repositori</span>: <span class="code-val">github.com/Gigajn</span><br>
-                <span class="code-key">Kategori</span>: <span class="code-val">Fullstack, Mobile, Systems & AI/ML</span><br>
-                <span class="code-key">Teknologi</span>: <span class="code-val">Next.js, Go, Rust, Kotlin, Python</span><br>
-                <span class="code-key">Katalog</span>: <span class="code-val">14 Proyek Terbuka</span>
+                <span class="code-key">Peran</span>: <span class="code-val">ML Engineer · AI Engineer · Applied AI</span><br>
+                <span class="code-key">Fokus</span>: <span class="code-val">Klasifikasi, NLP, Computer Vision, LLM Agents</span><br>
+                <span class="code-key">Stack AI</span>: <span class="code-val">Python, TensorFlow/Keras, Scikit-Learn, XGBoost</span><br>
+                <span class="code-key">Rekayasa</span>: <span class="code-val">Rust, Go, FastAPI, Laravel, Flutter, Kotlin</span><br>
+                <span class="code-key">Katalog</span>: <span class="code-val"><span data-count="all">14</span> proyek</span>
               </div>
               <div class="code-line" style="margin-top: 10px;">
-                <span class="cmd-prompt">❯</span> <span class="code-comment">// Klik kartu proyek untuk melihat alur dan kode sumber</span>
+                <span class="cmd-prompt">❯</span> <span class="code-comment">// Klik kartu proyek untuk detail, kode sumber, dan demo</span>
               </div>
             </div>
           </div>
 
           <!-- Metric Widget 1: Floating Frosted Glass (Left) -->
           <div class="hero-metric-glass metric-left">
-            <div class="metric-num">14</div>
+            <div class="metric-num" data-count="all">14</div>
             <div class="metric-meta">
-              <strong>Koleksi Proyek</strong>
-              <span>Web, Mobile, Systems & AI</span>
+              <strong>Proyek</strong>
+              <span>AI, Web, Mobile & Systems</span>
             </div>
           </div>
 
           <!-- Metric Widget 2: Floating Frosted Glass (Right) -->
           <div class="hero-metric-glass metric-right">
-            <div class="metric-num">45+</div>
+            <div class="metric-num" data-count="ai">5</div>
             <div class="metric-meta">
-              <strong>Tangkapan Layar</strong>
-              <span>Antarmuka & Alur Penggunaan</span>
+              <strong>Proyek AI & ML</strong>
+              <span>Deep Learning, NLP, CV & LLM</span>
             </div>
           </div>
         </div>
@@ -1483,13 +1546,48 @@
 
   <!-- Section 2: Editorial Transition -->
   <section class="section-intro-area">
-    <div class="micro-pill-badge" style="background: var(--accent-theme);">• DOKUMENTASI PROYEK</div>
+    <div class="micro-pill-badge" style="background: var(--accent-theme);">• KOMPETENSI</div>
     <h2 class="section-headline">
-      Koleksi Proyek Rekayasa.<br>
-      <span class="accent-terracotta">Dokumentasi & Kode Sumber</span>.
+      Dari data mentah<br>
+      <span class="accent-terracotta">hingga produk AI yang dipakai</span>.
     </h2>
     <p class="section-subtext">
-      Daftar proyek perangkat lunak yang dibangun untuk menyelesaikan berbagai kebutuhan teknis dan operasional. Silakan eksplorasi melalui filter kategori di bawah.
+      Kemampuan inti yang ditunjukkan langsung oleh proyek-proyek di portofolio ini.
+    </p>
+  </section>
+
+  <section class="skills-grid" aria-label="Kompetensi inti">
+    <div class="skill-card">
+      <h3>Machine Learning & Deep Learning</h3>
+      <p>Persiapan data, pelatihan, evaluasi, dan penyetelan model klasifikasi untuk data tabular dan kesehatan.</p>
+      <div class="card-tags-row">
+        <span class="tag-item-pill">Python</span><span class="tag-item-pill">TensorFlow / Keras</span><span class="tag-item-pill">Scikit-Learn</span><span class="tag-item-pill">XGBoost</span><span class="tag-item-pill">Random Forest</span><span class="tag-item-pill">Pandas</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>AI Terapan: NLP, CV & LLM</h3>
+      <p>Klasifikasi teks bahasa Indonesia, deteksi penyakit tanaman dari foto, dan sistem multi-agent berbasis LLM.</p>
+      <div class="card-tags-row">
+        <span class="tag-item-pill">TF-IDF & Naive Bayes</span><span class="tag-item-pill">Computer Vision</span><span class="tag-item-pill">LLM Agents & Tools</span><span class="tag-item-pill">Embeddings</span><span class="tag-item-pill">Prompting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Rekayasa Perangkat Lunak</h3>
+      <p>Membawa model ke tangan pengguna lewat aplikasi web, mobile, API, dan perkakas sistem.</p>
+      <div class="card-tags-row">
+        <span class="tag-item-pill">Streamlit</span><span class="tag-item-pill">FastAPI</span><span class="tag-item-pill">Rust</span><span class="tag-item-pill">Go</span><span class="tag-item-pill">Laravel</span><span class="tag-item-pill">Flutter / Kotlin</span><span class="tag-item-pill">PostgreSQL</span><span class="tag-item-pill">Docker</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-intro-area">
+    <div class="micro-pill-badge" style="background: var(--accent-theme);">• PROYEK</div>
+    <h2 class="section-headline">
+      Proyek AI & Perangkat Lunak.<br>
+      <span class="accent-terracotta">Lengkap dengan kode & demo</span>.
+    </h2>
+    <p class="section-subtext">
+      Proyek AI dan ML ditampilkan lebih dulu. Gunakan filter atau pencarian untuk melihat proyek berdasarkan bidang atau teknologi.
     </p>
   </section>
 
@@ -1500,7 +1598,7 @@
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" id="search-input" class="search-pill-input" placeholder="Cari nama proyek atau teknologi (misal: Rust, Next.js, Flutter)..." oninput="handleSearch()">
+      <input type="text" id="search-input" class="search-pill-input" placeholder="Cari proyek atau teknologi (misal: TensorFlow, NLP, Rust)..." oninput="handleSearch()">
     </div>
     <div class="count-indicator-text" id="display-count-text">
       Menampilkan 14 dari 14 proyek
@@ -1510,14 +1608,24 @@
   <!-- Projects Grid -->
   <main class="projects-grid-area" id="projects-grid"></main>
 
+  <!-- Contact -->
+  <section class="contact-band" id="kontak">
+    <h2>Mari terhubung.</h2>
+    <p>Terbuka untuk peluang sebagai Machine Learning Engineer, AI Engineer, atau peran AI terapan lainnya di perusahaan nasional maupun multinasional.</p>
+    <div class="hero-cta-row">
+      <a class="btn-explore-works" href="https://www.linkedin.com/in/gigajdn" target="_blank" rel="noopener">Hubungi via LinkedIn ↗</a>
+      <a class="btn-outline-pill" href="https://github.com/Gigajn" target="_blank" rel="noopener">Lihat GitHub ↗</a>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div style="max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
       <div>
-        <b>Gigajn</b> &bull; Portofolio Rekayasa Perangkat Lunak & Sistem.
+        <b>Gigajn</b> &bull; Portofolio Machine Learning & AI Engineer.
       </div>
       <div>
-        GitHub Pages Ready &bull; Kode sumber di <a href="https://github.com/Gigajn" target="_blank">github.com/Gigajn</a>
+        <a href="https://www.linkedin.com/in/gigajdn" target="_blank" rel="noopener">LinkedIn</a> &bull; <a href="https://github.com/Gigajn" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </footer>
@@ -1549,7 +1657,7 @@
         <div class="detail-card-panel">
           <div class="panel-h3-title">
             <span>✨</span>
-            <span>Fitur Utama & Keunggulan Rekayasa</span>
+            <span>Fitur & Kontribusi Utama</span>
           </div>
           <ul class="panel-ul-list" id="modal-features"></ul>
         </div>
@@ -1558,7 +1666,7 @@
         <div class="detail-card-panel">
           <div class="panel-h3-title">
             <span>🏛️</span>
-            <span>Alur Kerja & Arsitektur Sistem</span>
+            <span>Pendekatan & Arsitektur</span>
           </div>
           <div class="arch-mono-text" id="modal-architecture"></div>
         </div>
@@ -1580,16 +1688,24 @@
         let res;
         // Compatible with local Rust server AND static GitHub Pages deployment
         try {
-          res = await fetch('/api/projects');
+          res = await fetch('./api/projects');
           if (!res.ok) throw new Error('Static fallback');
         } catch {
           res = await fetch('./projects.json');
         }
         projectsData = await res.json();
+        updateCounts();
         renderProjects();
       } catch (err) {
         console.error('Failed to load projects:', err);
       }
+    }
+
+    function updateCounts() {
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const key = el.dataset.count;
+        el.innerText = key === 'all' ? projectsData.length : projectsData.filter(p => p.category === key).length;
+      });
     }
 
     function scrollToGrid() {
@@ -1612,6 +1728,19 @@
     // Helper: generate realistic application device mockup HTML
     function buildMockupHtml(p, rawSrc) {
       if (!rawSrc) {
+        const steps = p.diagram || [];
+        if (steps.length) {
+          return `
+            <div class="mockup-terminal-window">
+              <div class="terminal-titlebar">
+                <div class="window-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <span class="terminal-title-text">${p.id} — alur kerja</span>
+              </div>
+              <div style="padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;line-height:1.9;color:#d7e3d0;">
+                ${steps.map((s, i) => `<div><span style="color:#8fbf7a;">${i === 0 ? '❯' : '└─'}</span> ${s}</div>`).join('')}
+              </div>
+            </div>`;
+        }
         return `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-weight:600;font-size:0.85rem;">Pratinjau Arsitektur</div>`;
       }
       const imgSrc = resolveAsset(rawSrc);
@@ -1723,7 +1852,7 @@
         let stageThemeClass = 'stage-theme-web';
         if (p.category === 'mobile' || p.id === 'apps-penyakit-padi' || p.id === 'dairy-apps' || p.id === 'games-ar') {
           stageThemeClass = 'stage-theme-mobile';
-        } else if (p.category === 'systems' || p.id === 'jackup') {
+        } else if (p.category === 'systems' || p.id === 'jackup' || p.id === 'archodin') {
           stageThemeClass = 'stage-theme-systems';
         } else if (p.id === 'erp-snouvier') {
           stageThemeClass = 'stage-theme-pos';
@@ -1733,8 +1862,8 @@
           ? `<span class="pill-badge-stage">⚙ ${p.stage_badge}</span>`
           : '';
 
-        let liveBadge = p.live_url
-          ? `<span class="pill-badge-live">● Live Domain</span>`
+        let liveBadge = (p.live_url && !p.live_label)
+          ? `<span class="pill-badge-live">● Live</span>`
           : '';
 
         let countBadge = (p.screenshots && p.screenshots.length > 1)
@@ -1762,10 +1891,11 @@
             <p class="card-summary-desc">${p.summary}</p>
             <div class="card-tags-row">${tagsHtml}</div>
             <div class="card-footer-row">
-              <span class="btn-card-detail">Mockup & Alur Kerja &rarr;</span>
+              <span class="btn-card-detail">Lihat Detail &rarr;</span>
               <div class="card-action-btns">
                 ${p.github_url ? `<a href="${p.github_url}" target="_blank" class="pill-link-btn btn-github-outline" onclick="event.stopPropagation()">GitHub ↗</a>` : ''}
-                ${p.live_url ? `<a href="${p.live_url}" target="_blank" class="pill-link-btn btn-live-terracotta" onclick="event.stopPropagation()">Live Web ↗</a>` : ''}
+                ${p.live_url ? `<a href="${p.live_url}" target="_blank" rel="noopener" class="pill-link-btn btn-live-terracotta" onclick="event.stopPropagation()">${p.live_label ? 'Demo ↗' : 'Live Web ↗'}</a>` : ''}
+                ${!p.github_url && !p.live_url && p.link_note ? `<span class="card-link-note">${p.stage_badge ? 'Belum dirilis' : 'Repo privat'}</span>` : ''}
               </div>
             </div>
           </div>
@@ -1799,9 +1929,7 @@
 
       const stageBox = document.getElementById('modal-stage-box');
       if (p.stage_badge) {
-        let stageDesc = (p.category === 'systems' || p.id === 'jackup')
-          ? 'Proyek ini berupa perkakas baris perintah (CLI) dan service daemon di Linux yang berjalan tanpa antarmuka grafis web, dan saat ini masih dalam tahap pengembangan aktif.'
-          : 'Aplikasi ini masih dalam tahap pengembangan aktif untuk pengujian model deteksi penyakit tanaman pada perangkat Android.';
+        let stageDesc = p.stage_note || 'Proyek ini masih dalam tahap pengembangan aktif.';
         stageBox.innerHTML = `
           <div class="modal-stage-notice">
             <span class="stage-notice-icon">⚙</span>
@@ -1845,10 +1973,13 @@
       }
       if (p.live_url) {
         linksContainer.innerHTML += `
-          <a href="${p.live_url}" target="_blank" class="btn-modal-action-live">
-            🚀 Buka Demo Live (${p.live_url}) ↗
+          <a href="${p.live_url}" target="_blank" rel="noopener" class="btn-modal-action-live">
+            🚀 ${p.live_label || 'Buka Demo Live'} ↗
           </a>
         `;
+      }
+      if (p.link_note) {
+        linksContainer.innerHTML += `<p class="card-link-note">${p.link_note}</p>`;
       }
 
       document.getElementById('project-modal').classList.add('open');
