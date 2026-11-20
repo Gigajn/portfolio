@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>TikTok Comment NLP Filter — Threat Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1366px; height: 768px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #090d16; color: #e2e8f0;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    height: 60px; background: #0b1120; border-bottom: 1px solid #1e293b;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px;
+  }
+  .layout { flex: 1; display: flex; flex-direction: column; padding: 20px 28px; gap: 16px; overflow: hidden; }
+  
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi-card { background: #131b2e; border: 1px solid #1e293b; border-radius: 12px; padding: 14px 18px; }
+  
+  .stream-box {
+    flex: 1; background: #131b2e; border: 1px solid #1e293b; border-radius: 14px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .comment-item {
+    padding: 12px 18px; border-bottom: 1px solid #1e293b;
+    display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem;
+  }
+  .tag-danger {
+    background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444;
+    color: #f87171; padding: 3px 10px; border-radius: 6px; font-weight: 700; font-size: 0.7rem;
+  }
+  .tag-clean {
+    background: rgba(34, 197, 94, 0.2); border: 1px solid #22c55e;
+    color: #4ade80; padding: 3px 10px; border-radius: 6px; font-weight: 700; font-size: 0.7rem;
+  }
+  .token-pill {
+    background: rgba(239, 68, 68, 0.3); color: #fca5a5;
+    padding: 1px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 36px; height: 36px; background: #e11d48; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.1rem;">TK</div>
+      <div>
+        <div style="font-weight: 800; font-size: 1rem; color: #ffffff;">TikTok Comment Scraper & NLP Judol Spam Detector</div>
+        <div style="font-size: 0.72rem; color: #94a3b8;">Playwright Headless Stealth &bull; TF-IDF Vectorizer &bull; Multinomial Naive Bayes</div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <span style="font-size: 0.75rem; font-weight: 700; background: rgba(34, 197, 94, 0.15); color: #4ade80; padding: 6px 14px; border-radius: 9999px; border: 1px solid rgba(34, 197, 94, 0.3);">
+        ● Stealth Worker Connected
+      </span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div style="font-size: 1.4rem; font-weight: 800; color: #ffffff;">1,850</div>
+        <div style="font-size: 0.72rem; color: #94a3b8; font-weight: 600;">Komentar Terpanen</div>
+      </div>
+      <div class="kpi-card">
+        <div style="font-size: 1.4rem; font-weight: 800; color: #f87171;">342 (18.5%)</div>
+        <div style="font-size: 0.72rem; color: #f87171; font-weight: 600;">Promosi Judol Terdeteksi</div>
+      </div>
+      <div class="kpi-card">
+        <div style="font-size: 1.4rem; font-weight: 800; color: #fbbf24;">128 (6.9%)</div>
+        <div style="font-size: 0.72rem; color: #fbbf24; font-weight: 600;">Spam Afiliasi & Bot</div>
+      </div>
+      <div class="kpi-card">
+        <div style="font-size: 1.4rem; font-weight: 800; color: #4ade80;">1,380 (74.6%)</div>
+        <div style="font-size: 0.72rem; color: #4ade80; font-weight: 600;">Komentar Alami Bersih</div>
+      </div>
+    </div>
+
+    <div class="stream-box">
+      <div style="padding: 12px 18px; border-bottom: 1px solid #1e293b; font-weight: 800; font-size: 0.85rem; color: white;">
+        Feed Komentar Terklasifikasi Real-Time
+      </div>
+      
+      <div class="comment-item">
+        <div>
+          <div style="font-weight: 700; color: #ffffff;">@bocah_gacor99</div>
+          <div style="color: #cbd5e1; margin-top: 2px;">
+            MODAL RECEH PASTI JP <span class="token-pill">gacor</span> MAXWIN klik link bio admin WA 0812xxxx
+          </div>
+          <div style="margin-top: 4px; font-size: 0.7rem; color: #94a3b8;">Trigger Tokens: gacor [0.98], maxwin [0.95], link bio [0.91]</div>
+        </div>
+        <span class="tag-danger">⛔ JUDI ONLINE (99.4%)</span>
+      </div>
+
+      <div class="comment-item">
+        <div>
+          <div style="font-weight: 700; color: #ffffff;">@situs_resmi_asia</div>
+          <div style="color: #cbd5e1; margin-top: 2px;">
+            Situs terpercaya anti rungkad deposit 10rb langsung cuan gais cek profil
+          </div>
+        </div>
+        <span class="tag-danger">⛔ JUDI ONLINE (98.7%)</span>
+      </div>
+
+      <div class="comment-item">
+        <div>
+          <div style="font-weight: 700; color: #ffffff;">@dani_gamers</div>
+          <div style="color: #cbd5e1; margin-top: 2px;">
+            Keren banget pembahasannya bang, build itemnya cocok buat rank Mythic
+          </div>
+        </div>
+        <span class="tag-clean">✓ KOMENTAR NORMAL</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

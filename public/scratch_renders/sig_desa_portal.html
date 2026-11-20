@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Portal Transparansi & Statistik Penduduk Desa Sukamaju</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+    padding: 32px;
+  }
+  .portal-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .hero-banner {
+    background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #059669 100%);
+    border-radius: 20px;
+    padding: 32px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px -5px rgba(5, 150, 105, 0.3);
+  }
+  .hero-badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    max-width: 620px;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* Metric Cards */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .metric-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+  .metric-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.04em;
+  }
+  .metric-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 6px 0 2px;
+  }
+  .metric-footer {
+    font-size: 0.78rem;
+    color: #059669;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Charts & Info Grid */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 20px;
+  }
+  .panel-box {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .panel-h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bar-chart-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #334155;
+  }
+  .bar-track {
+    height: 10px;
+    background: #f1f5f9;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+  }
+
+  .service-search-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 14px;
+  }
+  .service-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    margin-top: 8px;
+  }
+  .service-btn {
+    width: 100%;
+    background: #059669;
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+  <div class="portal-wrap">
+
+    <div class="hero-banner">
+      <div>
+        <div class="hero-badge">PORTAL PELAYANAN & STATISTIK RESMI</div>
+        <div class="hero-title">Sistem Informasi Profil Desa Sukamaju</div>
+        <div class="hero-sub">Pusat data terpadu kependudukan, pemetaan spasial desa, transparansi bantuan sosial, dan layanan administrasi mandiri warga.</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 0.8rem; opacity: 0.85;">Status Sistem Multi-Tenant</div>
+        <div style="font-size: 1.1rem; font-weight: 700; color: #a7f3d0; margin-top: 2px;">● Online & Terverifikasi</div>
+      </div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-label">Total Penduduk</div>
+        <div class="metric-value">4,856</div>
+        <div class="metric-footer">✓ 2,416 Pria • 2,440 Wanita</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Kepala Keluarga (KK)</div>
+        <div class="metric-value">1,420</div>
+        <div class="metric-footer">✓ 100% NIK Tervalidasi Dukcapil</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Luas Wilayah Spasial</div>
+        <div class="metric-value">842.5 Ha</div>
+        <div class="metric-footer">✓ Terbagi dalam 3 Dusun & 16 RW</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Penerima Bantuan (Bansos)</div>
+        <div class="metric-value">342 KK</div>
+        <div class="metric-footer" style="color: #0284c7;">✓ Tervalidasi Desil 1 & 2</div>
+      </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="content-grid">
+      <div class="panel-box">
+        <div class="panel-h3">
+          <span>Struktur Demografi Berdasarkan Wilayah Dusun</span>
+          <span style="font-size: 0.75rem; color: #64748b; font-weight: 500;">Diperbarui per Maret 2026</span>
+        </div>
+        <div class="bar-chart-row">
+          <div class="bar-item">
+            <div class="bar-header">
+              <span>Dusun I Krajan (6 RW • 18 RT)</span>
+              <span>2,140 Jiwa (44.1%)</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width: 44.1%; background: #059669;"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header">
+              <span>Dusun II Waringin (5 RW • 16 RT)</span>
+              <span>1,620 Jiwa (33.4%)</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width: 33.4%; background: #2563eb;"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-header">
+              <span>Dusun III Karanganyar (5 RW • 14 RT)</span>
+              <span>1,096 Jiwa (22.5%)</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width: 22.5%; background: #d97706;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-box">
+        <div class="panel-h3">
+          <span>Layanan Mandiri Warga Desa</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #64748b; line-height: 1.5;">Masukkan NIK untuk mengecek status administrasi kependudukan dan bantuan sosial.</p>
+        <div class="service-search-box">
+          <div style="font-size: 0.72rem; font-weight: 700; color: #475569;">NOMOR INDUK KEPENDUDUKAN (16 DIGIT)</div>
+          <input type="text" class="service-input" value="3302141508920003" placeholder="3302xxxxxxxxxxxx">
+          <button class="service-btn">Cek Data Kependudukan & Bansos</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Dairy Apps - Onboarding Karakter</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 412px;
+    height: 892px;
+    background: #faf7f2;
+    color: #292524;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  .android-status-bar {
+    height: 38px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #44403c;
+  }
+  .screen-header {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-logo {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1c1917;
+  }
+  .step-indicator {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #bc7962;
+    background: #fbf7f4;
+    border: 1px solid #ebd9d1;
+    padding: 3px 10px;
+    border-radius: 9999px;
+  }
+  .content-scroll {
+    flex: 1;
+    padding: 20px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .question-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #a8a29e;
+    letter-spacing: 0.05em;
+  }
+  .question-h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1c1917;
+    line-height: 1.3;
+  }
+  .question-desc {
+    font-size: 0.82rem;
+    color: #78716c;
+    line-height: 1.5;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .opt-card {
+    background: white;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .opt-card.selected {
+    border-color: #bc7962;
+    background: #fbf8f6;
+    box-shadow: 0 4px 14px rgba(188, 121, 98, 0.12);
+  }
+  .opt-icon {
+    font-size: 1.5rem;
+  }
+  .opt-text h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1c1917;
+  }
+  .opt-text p {
+    font-size: 0.75rem;
+    color: #78716c;
+    margin-top: 2px;
+  }
+
+  .btn-continue {
+    background: #bc7962;
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 14px;
+    border-radius: 14px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(188, 121, 98, 0.3);
+    margin-top: auto;
+  }
+
+  .android-gesture-pill {
+    width: 108px;
+    height: 4px;
+    background: #1c1917;
+    opacity: 0.3;
+    border-radius: 9999px;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+  }
+</style>
+</head>
+<body>
+
+  <div class="android-status-bar">
+    <span>21:14</span>
+    <div style="display:flex; gap:6px;">
+      <span>WiFi</span>
+      <span>🔋 89%</span>
+    </div>
+  </div>
+
+  <div class="screen-header">
+    <div class="brand-logo">🌿 LifeChapter</div>
+    <div class="step-indicator">Langkah 1 dari 3</div>
+  </div>
+
+  <div class="content-scroll">
+    <div>
+      <div class="question-tag">Linguistic Register & Tone</div>
+      <h2 class="question-h2">Bagaimana caramu ingin AI Companion menyapa?</h2>
+      <p class="question-desc">Ini menentukan kata ganti dan nada emosional yang dipakai saat menyusun bab memoir kehidupanmu.</p>
+    </div>
+
+    <div class="options-list">
+      <div class="opt-card selected">
+        <div class="opt-icon">☕</div>
+        <div class="opt-text">
+          <h3>Hangat & Akrab (Aku)</h3>
+          <p>Gaya percakapan sahabat karib, reflektif, jujur, dan menenangkan.</p>
+        </div>
+      </div>
+
+      <div class="opt-card">
+        <div class="opt-icon">🏛️</div>
+        <div class="opt-text">
+          <h3>Tenang & Formal (Saya)</h3>
+          <p>Gaya observasi bijak, runtut, berjarak sehat, dan lebih tertata.</p>
+        </div>
+      </div>
+
+      <div class="opt-card">
+        <div class="opt-icon">✨</div>
+        <div class="opt-text">
+          <h3>Ekspresif & Lepas (Gue)</h3>
+          <p>Santai, gaya urban kontemporer, ekspresif tanpa sekat formalitas.</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-continue">Lanjutkan ke Kalibrasi Emosi →</button>
+  </div>
+
+  <div class="android-gesture-pill"></div>
+
+</body>
+</html>

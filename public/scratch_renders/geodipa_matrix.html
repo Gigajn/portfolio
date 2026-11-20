@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Matriks Ternormalisasi SAW — Geodipa</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 714px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #ffffff; color: #1e293b;
+    padding: 30px; display: flex; flex-direction: column; gap: 18px;
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  th { background: #f8fafc; padding: 12px; border: 1px solid #e2e8f0; font-weight: 700; color: #475569; }
+  td { padding: 12px; border: 1px solid #e2e8f0; text-align: center; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #0284c7; }
+</style>
+</head>
+<body>
+  <div>
+    <h2 style="font-size: 1.2rem; font-weight: 800; color: #0f172a;">Matriks Normalisasi R_ij (Simple Additive Weighting)</h2>
+    <p style="font-size: 0.78rem; color: #64748b; margin-top: 4px;">Kalkulasi normalisasi kriteria Benefit: R_ij = X_ij / Max(X_ij)</p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Alternatif (Karyawan)</th>
+        <th>R1 (Disiplin)</th>
+        <th>R2 (Kinerja)</th>
+        <th>R3 (Kerjasama)</th>
+        <th>R4 (Inisiatif)</th>
+        <th>R5 (Loyalitas)</th>
+        <th>Nilai Akhir (V_i)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left; font-weight: 700;">A1 - Eko Prasetyo, S.T.</td>
+        <td class="mono">0.979</td>
+        <td class="mono">1.000</td>
+        <td class="mono">0.968</td>
+        <td class="mono">0.923</td>
+        <td class="mono">1.000</td>
+        <td class="mono" style="color: #166534; font-weight: 800; font-size: 0.95rem;">0.948</td>
+      </tr>
+      <tr>
+        <td style="text-align: left; font-weight: 700;">A2 - Siti Nurhaliza, M.M.</td>
+        <td class="mono">0.959</td>
+        <td class="mono">0.969</td>
+        <td class="mono">0.947</td>
+        <td class="mono">0.961</td>
+        <td class="mono">0.900</td>
+        <td class="mono" style="color: #0f172a; font-weight: 800;">0.925</td>
+      </tr>
+      <tr>
+        <td style="text-align: left; font-weight: 700;">A3 - Budi Santoso, A.Md.</td>
+        <td class="mono">0.918</td>
+        <td class="mono">0.938</td>
+        <td class="mono">0.926</td>
+        <td class="mono">0.884</td>
+        <td class="mono">0.850</td>
+        <td class="mono" style="color: #0f172a; font-weight: 800;">0.894</td>
+      </tr>
+      <tr>
+        <td style="text-align: left; font-weight: 700;">A4 - Dewi Lestari, S.Kom.</td>
+        <td class="mono">0.897</td>
+        <td class="mono">0.908</td>
+        <td class="mono">0.894</td>
+        <td class="mono">0.846</td>
+        <td class="mono">0.850</td>
+        <td class="mono" style="color: #0f172a; font-weight: 800;">0.871</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

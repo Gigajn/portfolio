@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>YouTube Split Downloader & Audio Workstation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1366px; height: 768px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0f172a; color: #e2e8f0;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    height: 60px; background: #0b1120; border-bottom: 1px solid #1e293b;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px;
+  }
+  .layout { flex: 1; padding: 22px 28px; display: flex; flex-direction: column; gap: 18px; overflow: hidden; }
+  
+  .album-box {
+    background: #1e293b; border: 1px solid #334155; border-radius: 14px;
+    padding: 18px 24px; display: flex; gap: 20px; align-items: center;
+  }
+  .waveform-card {
+    flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 14px;
+    padding: 20px; display: flex; flex-direction: column; gap: 14px; overflow: hidden;
+  }
+  .track-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: #0f172a; border: 1px solid #334155; border-radius: 8px;
+    font-size: 0.78rem;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #38bdf8; }
+</style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 36px; height: 36px; background: #f59e0b; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-size: 1.1rem;">YT</div>
+      <div>
+        <div style="font-weight: 800; font-size: 1rem; color: #ffffff;">YouTube Split Downloader & Audio Track Slicer</div>
+        <div style="font-size: 0.72rem; color: #94a3b8;">yt-dlp Engine &bull; FFmpeg Audio Slicing &bull; Multithreaded Background Job Manager</div>
+      </div>
+    </div>
+    <div style="font-size: 0.75rem; font-weight: 700; background: rgba(245, 158, 11, 0.15); color: #fbbf24; padding: 6px 14px; border-radius: 9999px; border: 1px solid rgba(245, 158, 11, 0.3);">
+      MP3 320 kbps &bull; Lossless Slicing
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="album-box">
+      <div style="width: 80px; height: 80px; background: #334155; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem;">
+        🎵
+      </div>
+      <div style="flex: 1;">
+        <div style="font-size: 1.1rem; font-weight: 800; color: white;">Lofi Beats for Coding & Deep Focus [Full Album]</div>
+        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">
+          Durasi: 01:08:42 &bull; 8 Chapters Terdeteksi &bull; Kanal: Chillhop Music
+        </div>
+      </div>
+      <button style="background: #2563eb; color: white; border: none; font-weight: 800; padding: 12px 20px; border-radius: 10px; font-size: 0.82rem;">
+        📦 Ekspor Semua Track (.ZIP)
+      </button>
+    </div>
+
+    <div class="waveform-card">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-weight: 800; font-size: 0.88rem; color: white;">Waveform Audio & Pemotong Otomatis Berdasarkan Timestamp</div>
+        <div style="font-size: 0.72rem; color: #4ade80; font-weight: 700;">● Worker #1 Aktif (8 Threads)</div>
+      </div>
+
+      <!-- Waveform Bars -->
+      <div style="height: 60px; background: #0f172a; border: 1px solid #334155; border-radius: 10px; display: flex; align-items: center; gap: 3px; padding: 0 10px;">
+        <div style="width: 4px; height: 35px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 50px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 28px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 42px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 20px; background: #f59e0b; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 48px; background: #f59e0b; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 32px; background: #f59e0b; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 40px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 25px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 52px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 30px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 44px; background: #38bdf8; border-radius: 2px;"></div>
+        <div style="width: 4px; height: 18px; background: #38bdf8; border-radius: 2px;"></div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div class="track-row">
+          <div>
+            <strong>Track 01. Dawn Reflections</strong>
+            <span class="mono" style="margin-left: 10px;">00:00 - 04:15</span>
+          </div>
+          <span style="color: #4ade80; font-weight: 700;">✓ Selesai Terpotong</span>
+        </div>
+        <div class="track-row">
+          <div>
+            <strong>Track 02. Rainy Terminal</strong>
+            <span class="mono" style="margin-left: 10px;">04:15 - 08:32</span>
+          </div>
+          <span style="color: #4ade80; font-weight: 700;">✓ Selesai Terpotong</span>
+        </div>
+        <div class="track-row">
+          <div>
+            <strong>Track 03. Midnight Async</strong>
+            <span class="mono" style="margin-left: 10px;">08:32 - 13:10</span>
+          </div>
+          <span style="color: #38bdf8; font-weight: 700;">Memproses (78%)...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

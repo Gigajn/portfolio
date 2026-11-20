@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>BGE Supply — Stock Management System & Shopify Sync</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1366px; height: 768px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0f172a; color: #e2e8f0;
+    display: flex; overflow: hidden;
+  }
+  .sidebar {
+    width: 260px; background: #090d16; border-right: 1px solid #1e293b;
+    padding: 24px 18px; display: flex; flex-direction: column; gap: 20px;
+  }
+  .brand-logo { display: flex; align-items: center; gap: 10px; }
+  .logo-square {
+    width: 36px; height: 36px; background: #3b82f6; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 1.1rem;
+  }
+  .nav-group { display: flex; flex-direction: column; gap: 4px; }
+  .nav-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+    color: #94a3b8;
+  }
+  .nav-active { background: #1e293b; color: #ffffff; }
+
+  .main-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #0f172a; }
+  .top-navbar {
+    height: 60px; border-bottom: 1px solid #1e293b;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; background: #0b1120;
+  }
+  .sync-status {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #4ade80; padding: 6px 14px; border-radius: 9999px;
+    font-size: 0.72rem; font-weight: 700;
+  }
+
+  .content-area { flex: 1; padding: 22px 28px; display: flex; flex-direction: column; gap: 18px; overflow: hidden; }
+  
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .stat-item {
+    background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+    padding: 14px 18px;
+  }
+  .stat-val { font-size: 1.4rem; font-weight: 800; color: #ffffff; }
+  .stat-lbl { font-size: 0.72rem; color: #94a3b8; font-weight: 600; margin-top: 2px; }
+
+  .filament-table {
+    flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 14px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .table-titlebar {
+    padding: 14px 20px; border-bottom: 1px solid #334155;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; }
+  th {
+    background: #0f172a; padding: 12px 16px; font-weight: 700; color: #94a3b8;
+    border-bottom: 1px solid #334155; font-size: 0.72rem; text-transform: uppercase;
+  }
+  td { padding: 12px 16px; border-bottom: 1px solid #334155; color: #e2e8f0; }
+  
+  .sku-mono { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #38bdf8; font-size: 0.75rem; }
+  .badge-synced {
+    background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #4ade80; padding: 3px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 700;
+  }
+  .prod-thumb {
+    width: 36px; height: 36px; border-radius: 8px; background: #334155;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="brand-logo">
+      <div class="logo-square">BGE</div>
+      <div>
+        <div style="font-weight: 800; font-size: 0.95rem; color: white;">BGE Supply Co.</div>
+        <div style="font-size: 0.7rem; color: #64748b;">Filament 3 &bull; Shopify Sync</div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-link nav-active">📦 Katalog Produk</div>
+      <div class="nav-link">🔄 Offline Staging <span style="background: #3b82f6; color: white; padding: 1px 6px; border-radius: 9999px; font-size: 0.65rem;">3</span></div>
+      <div class="nav-link">⚡ Shopify Webhook Sync</div>
+      <div class="nav-link">💳 Kasir POS Penjualan</div>
+      <div class="nav-link">📋 Log Sinkronisasi</div>
+    </div>
+  </div>
+
+  <div class="main-panel">
+    <div class="top-navbar">
+      <div style="font-weight: 800; font-size: 1.05rem; color: white;">Manajemen Inventaris Multi-Channel</div>
+      <div class="sync-status">
+        <span>●</span> Webhook Aktif (bgesupply.myshopify.com)
+      </div>
+    </div>
+
+    <div class="content-area">
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-val">1,420 SKU</div>
+          <div class="stat-lbl">Total Katalog Produk</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">8,950 pcs</div>
+          <div class="stat-lbl">Kuantitas Stok Gudang</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">99.8%</div>
+          <div class="stat-lbl">Shopify Sync Success Rate</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">Rp 16.850.000</div>
+          <div class="stat-lbl">Omset Penjualan Hari Ini</div>
+        </div>
+      </div>
+
+      <div class="filament-table">
+        <div class="table-titlebar">
+          <div style="font-weight: 800; font-size: 0.88rem; color: white;">Master Data Produk & Status Sinkronisasi Online</div>
+          <span style="font-size: 0.72rem; color: #94a3b8;">Menampilkan 4 dari 1,420 Produk</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 50px;">Item</th>
+              <th>Nama Produk</th>
+              <th>SKU Barcode</th>
+              <th>Varian Ukuran</th>
+              <th>Stok Fisik</th>
+              <th>Stok Shopify</th>
+              <th>Harga Jual</th>
+              <th>Status API</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="prod-thumb">👕</div></td>
+              <td><strong style="color: white;">BGE Heavyweight Boxy Tee - Vintage Black</strong></td>
+              <td class="sku-mono">BGE-TS-001-BLK</td>
+              <td><span style="background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">S, M, L, XL</span></td>
+              <td style="font-weight: 700; color: white;">124 pcs</td>
+              <td style="font-weight: 700; color: #4ade80;">124 pcs</td>
+              <td style="font-weight: 700;">Rp 185.000</td>
+              <td><span class="badge-synced">✓ Terhubung</span></td>
+            </tr>
+            <tr>
+              <td><div class="prod-thumb">👖</div></td>
+              <td><strong style="color: white;">BGE Technical Cargo Pants - Forest Olive</strong></td>
+              <td class="sku-mono">BGE-CP-004-OLV</td>
+              <td><span style="background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">28, 30, 32, 34</span></td>
+              <td style="font-weight: 700; color: white;">48 pcs</td>
+              <td style="font-weight: 700; color: #4ade80;">48 pcs</td>
+              <td style="font-weight: 700;">Rp 345.000</td>
+              <td><span class="badge-synced">✓ Terhubung</span></td>
+            </tr>
+            <tr>
+              <td><div class="prod-thumb">🧥</div></td>
+              <td><strong style="color: white;">BGE Washed Full-Zip Hoodie - Charcoal Grey</strong></td>
+              <td class="sku-mono">BGE-HD-002-CHR</td>
+              <td><span style="background: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">M, L, XL</span></td>
+              <td style="font-weight: 700; color: white;">62 pcs</td>
+              <td style="font-weight: 700; color: #4ade80;">62 pcs</td>
+              <td style="font-weight: 700;">Rp 420.000</td>
+              <td><span class="badge-synced">✓ Terhubung</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

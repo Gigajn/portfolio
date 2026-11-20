@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Shopify Webhook Audit Logs — BGE Supply</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 714px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0f172a; color: #e2e8f0;
+    padding: 24px; display: flex; flex-direction: column; gap: 16px;
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  th { background: #1e293b; padding: 12px; border: 1px solid #334155; text-align: left; color: #94a3b8; }
+  td { padding: 10px 12px; border: 1px solid #334155; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; }
+</style>
+</head>
+<body>
+  <div>
+    <h2 style="font-size: 1.15rem; font-weight: 800; color: white;">Log Audit Sinkronisasi Shopify Webhook & REST API</h2>
+    <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Pemantauan rekonsiliasi data inventaris real-time antara kasir fisik dan toko daring</p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Waktu (UTC+7)</th>
+        <th>Event Topic</th>
+        <th>SKU Target</th>
+        <th>Delta Stok</th>
+        <th>Latency</th>
+        <th>Status Respons</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mono">2026-11-15 01:04:12</td>
+        <td><code>inventory_levels/set</code></td>
+        <td class="mono" style="color: #38bdf8;">BGE-TS-001-BLK-L</td>
+        <td style="color: #ef4444; font-weight: 700;">-1 (Penjualan POS)</td>
+        <td class="mono">118ms</td>
+        <td><span style="color: #4ade80; font-weight: 700;">200 OK (Synchronized)</span></td>
+      </tr>
+      <tr>
+        <td class="mono">2026-11-15 00:58:34</td>
+        <td><code>products/update</code></td>
+        <td class="mono" style="color: #38bdf8;">BGE-CP-004-OLV</td>
+        <td style="color: #3b82f6; font-weight: 700;">+24 (Restock Gudang)</td>
+        <td class="mono">142ms</td>
+        <td><span style="color: #4ade80; font-weight: 700;">200 OK (Synchronized)</span></td>
+      </tr>
+      <tr>
+        <td class="mono">2026-11-15 00:45:10</td>
+        <td><code>orders/create</code></td>
+        <td class="mono" style="color: #38bdf8;">BGE-HD-002-CHR-XL</td>
+        <td style="color: #ef4444; font-weight: 700;">-2 (Order Shopify)</td>
+        <td class="mono">98ms</td>
+        <td><span style="color: #4ade80; font-weight: 700;">200 OK (Staging Merged)</span></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

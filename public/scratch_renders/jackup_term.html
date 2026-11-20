@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Jackup — Systems CLI & Daemon (Rust Tokio)</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1100px; height: 640px;
+    font-family: 'JetBrains Mono', monospace;
+    background: #0d1117; color: #c9d1d9;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .term-header {
+    height: 38px; background: #161b22; border-bottom: 1px solid #30363d;
+    display: flex; align-items: center; padding: 0 16px; position: relative;
+  }
+  .dots { display: flex; gap: 8px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+  .term-title {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-size: 0.75rem; color: #8b949e; font-weight: 600;
+  }
+  .term-body {
+    flex: 1; padding: 22px 24px; font-size: 0.85rem; line-height: 1.6;
+    overflow: hidden; display: flex; flex-direction: column; gap: 6px;
+  }
+  .prompt { color: #58a6ff; font-weight: 700; }
+  .cmd { color: #f0f6fc; font-weight: 600; }
+  .info { color: #79c0ff; }
+  .success { color: #56d364; }
+  .warn { color: #e3b341; }
+  .prog-bar { color: #56d364; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="term-header">
+    <div class="dots">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+    </div>
+    <div class="term-title">kudo@thinkpad — zsh — jackup sync --volume db_data --target node-02.prod</div>
+  </div>
+  <div class="term-body">
+    <div><span class="prompt">❯</span> <span class="cmd">jackup sync --volume db_data --target 10.240.0.12:9443 --crypto chacha20 --compress zstd</span></div>
+    <div><span class="info">[2026-11-15T01:05:01Z INFO  jackup_core::daemon]</span> Handshake established with target node-02 (TLS 1.3 / mTLS verified)</div>
+    <div><span class="info">[2026-11-15T01:05:01Z INFO  jackup_crypto]</span> Deriving master transport key with Argon2id (m=64MB, t=3, p=4)... <span class="success">[14ms]</span></div>
+    <div><span class="info">[2026-11-15T01:05:01Z INFO  jackup_crypto]</span> AEAD cipher initialized: ChaCha20-Poly1305 stream channel active</div>
+    <div><span class="info">[2026-11-15T01:05:02Z INFO  jackup_sync::scanner]</span> Scanning volume /var/lib/docker/volumes/db_data/_data</div>
+    <div><span class="info">[2026-11-15T01:05:02Z INFO  jackup_sync::scanner]</span> 42,180 inodes indexed. Change delta: 8,412 modified blocks (14.2 GB)</div>
+    <div><span class="info">[2026-11-15T01:05:03Z INFO  jackup_transport]</span> Spawning 8 Tokio async worker pipelines with zero-copy splicing</div>
+    <div style="margin-top: 8px;">
+      <span class="prog-bar">Transfer: [===================================>-------] 82.4% (11.7 GB / 14.2 GB)</span>
+    </div>
+    <div>Throughput: <span class="success">412.5 MB/s</span> | Active Workers: 8 Tokio tasks | ETA: 6s | Checksum: SHA-256 match</div>
+    <div style="margin-top: 10px; color: #8b949e;">// Jackup: High-performance container volume migration daemon (Rust Tokio async)</div>
+  </div>
+</body>
+</html>

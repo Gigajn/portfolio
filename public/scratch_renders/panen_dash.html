@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 412px; height: 860px; background: #0f1d13; color: #f1f7f3; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; flex-direction: column; overflow: hidden; }
+.status-bar { height: 38px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: #94a3b8; }
+.header { padding: 10px 20px 16px; display: flex; justify-content: space-between; align-items: center; }
+.greeting { font-size: 1.2rem; font-weight: 800; color: #ffffff; }
+.loc-pill { background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.35); color: #4ade80; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px; }
+.content { flex: 1; padding: 0 20px 20px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+.weather-card { background: linear-gradient(135deg, #1b3824 0%, #102417 100%); border: 1px solid rgba(74, 222, 128, 0.25); border-radius: 18px; padding: 16px 18px; }
+.card-tag { font-size: 0.68rem; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px; }
+.temp-row { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+.temp { font-size: 2rem; font-weight: 800; }
+.crop-card { background: #162a1c; border: 1px solid #24442e; border-radius: 16px; padding: 14px 16px; }
+.crop-title { font-size: 0.95rem; font-weight: 700; color: #ffffff; display: flex; justify-content: space-between; }
+.badge-ok { background: #14532d; color: #4ade80; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+.fab-scan { background: #22c55e; color: #052e16; font-size: 0.9rem; font-weight: 800; padding: 14px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35); margin-top: 8px; }
+</style></head>
+<body>
+<div class="status-bar"><span>09:41</span><span>● 4G • 92%</span></div>
+<div class="header">
+  <div><div style="font-size: 0.72rem; color: #86efac; font-weight: 600;">Kelompok Tani Makmur</div><div class="greeting">Panen Tanam</div></div>
+  <span class="loc-pill">Kemranjen, Banyumas</span>
+</div>
+<div class="content">
+  <div class="weather-card">
+    <div class="card-tag">Kondisi Lingkungan Sawah</div>
+    <div class="temp-row">
+      <div><div class="temp">28°C</div><div style="font-size: 0.75rem; color: #9ca3af;">Cerah Berawan • Angin 6 km/j</div></div>
+      <div style="text-align: right;"><div style="font-size: 1.1rem; font-weight: 800; color: #facc15;">82%</div><div style="font-size: 0.7rem; color: #9ca3af;">Kelembaban Relatif</div></div>
+    </div>
+  </div>
+  <div class="crop-card">
+    <div class="crop-title"><span>Petak Sawah Barat (0.8 Ha)</span><span class="badge-ok">Kondisi Sehat</span></div>
+    <p style="font-size: 0.78rem; color: #9ca3af; margin-top: 6px;">Varietas: Ciherang • Usia: 42 HST (Fase Primordia). Tidak ditemukan tanda hawar daun pada pemindaian terakhir.</p>
+  </div>
+  <div class="crop-card">
+    <div class="crop-title"><span>Petak Sawah Timur (1.2 Ha)</span><span style="background:#713f12; color:#fde047; font-size:0.68rem; font-weight:700; padding:2px 8px; border-radius:6px;">Perlu Pemantauan</span></div>
+    <p style="font-size: 0.78rem; color: #9ca3af; margin-top: 6px;">Varietas: Inpari 32 • Usia: 35 HST. Terdeteksi bercak daun ringan pada tepi pematang.</p>
+  </div>
+  <div class="fab-scan"><span>📷</span><span>Mulai Pindai Daun Padi (Kamera AI)</span></div>
+</div>
+</body></html>

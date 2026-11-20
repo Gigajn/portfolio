@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Jackup: Zero-Downtime Migration Execution</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1100px;
+    height: 700px;
+    background: #0d1117;
+    color: #c9d1d9;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .term-header {
+    height: 42px;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+  .window-dots {
+    display: flex;
+    gap: 8px;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+  .term-title {
+    font-size: 0.8rem;
+    color: #8b949e;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+  }
+  .term-body {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+  .prompt { color: #58a6ff; }
+  .cmd { color: #f0f6fc; font-weight: 700; }
+  .badge-dev {
+    display: inline-block;
+    background: rgba(210, 153, 34, 0.15);
+    border: 1px solid #d29922;
+    color: #e3b341;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    margin-bottom: 14px;
+  }
+  .success { color: #3fb950; font-weight: 600; }
+  .warn { color: #d29922; }
+  .cyan { color: #38bdf8; }
+  .dim { color: #8b949e; }
+  .progress-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0;
+  }
+  .p-track {
+    width: 380px;
+    height: 8px;
+    background: #21262d;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .p-fill {
+    width: 100%;
+    height: 100%;
+    background: #3fb950;
+  }
+</style>
+</head>
+<body>
+
+  <div class="term-header">
+    <div class="window-dots">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+    </div>
+    <div class="term-title">jackup-orchestrator — live server migration logs</div>
+    <div style="font-size:0.75rem; color:#8b949e;">kernel 6.13-arch &bull; pid 14892</div>
+  </div>
+
+  <div class="term-body">
+    <div class="badge-dev">⚙ SISTEM OPERASIONAL: HEADLESS LINUX DAEMON & CRYPTO VAULT</div>
+    
+    <div><span class="prompt">root@node-target:~/Jackup#</span> <span class="cmd">cargo test --workspace -- --nocapture</span></div>
+    <div class="dim">    Finished test [unoptimized + debuginfo] target(s) in 1.14s</div>
+    <div class="dim">     Running unittests src/lib.rs (jackup-crypto)</div>
+    <div>test crypto::argon2id::test_key_derivation_parameters ... <span class="success">ok</span></div>
+    <div>test crypto::chacha20::test_aead_encryption_decryption ... <span class="success">ok</span></div>
+    <div>test crypto::vault::test_tamper_resistant_payload ... <span class="success">ok</span></div>
+    <div class="dim">     Running unittests src/lib.rs (jackup-orchestrator)</div>
+    <div>test orchestrator::namespaces::test_clone_pid_mount_isolation ... <span class="success">ok</span></div>
+    <div>test orchestrator::cgroups::test_memory_hard_limit_enforcement ... <span class="success">ok</span></div>
+    <div>test orchestrator::migration::test_zero_downtime_traffic_handshake ... <span class="success">ok</span></div>
+    <div><span class="success">test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured</span></div>
+    <br>
+    <div><span class="prompt">root@node-target:~/Jackup#</span> <span class="cmd">jackup migrate execute --session sess-78a2e --verify-checksum</span></div>
+    <div>[+] Inisialisasi kanal TLS 1.3 mutual authenticated + ChaCha20-Poly1305...</div>
+    <div>[+] Streaming blok penyimpanan (Persistent Volume Claims: 48.2 GB):</div>
+    
+    <div class="progress-bar-wrap">
+      <div class="p-track"><div class="p-fill"></div></div>
+      <span class="success">100.0% [48.2 GB / 48.2 GB] • 412 MB/s • Checksum: SHA-256 MATCH</span>
+    </div>
+
+    <div>[+] Memindahkan state memori container runtime tanpa menghentikan process IO...</div>
+    <div>[+] BGP Anycast routing dialihkan ke server mandiri (On-Premise Node 01)...</div>
+    <div><span class="success">🚀 REPATRIASI CLOUD SUKSES: 14 Container runtime aktif di target bare-metal.</span></div>
+    <div><span class="cyan">Total Waktu Pemindahan: 114s | Waktu Interupsi Layanan: 0.00 detik (Zero Downtime)</span></div>
+    <br>
+    <div><span class="prompt">root@node-target:~/Jackup#</span> <span style="animation: blink 1s infinite;">█</span></div>
+  </div>
+
+</body>
+</html>

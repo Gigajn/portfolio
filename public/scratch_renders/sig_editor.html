@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>SIG Desa — PostGIS Spatial Polygon Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1440px; height: 860px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0b1120; color: #f8fafc;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    height: 56px; background: #0f172a; border-bottom: 1px solid #1e293b;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px;
+  }
+  .tool-row { display: flex; align-items: center; gap: 8px; }
+  .btn-tool {
+    background: #1e293b; border: 1px solid #334155; color: #e2e8f0;
+    padding: 6px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-active { background: #166534; border-color: #22c55e; color: #ffffff; }
+  .btn-save { background: #2563eb; border-color: #3b82f6; color: #ffffff; }
+  
+  .layout-body { flex: 1; display: flex; overflow: hidden; }
+  .canvas-area {
+    flex: 1; position: relative;
+    background: url('file:///home/kudo/Projects/Portofolio/portfolio_rust/public/scratch_renders/indonesian_village_gis_aerial.jpg') center/cover no-repeat;
+  }
+  .side-inspector {
+    width: 360px; background: #0f172a; border-left: 1px solid #1e293b;
+    padding: 20px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .field-group { display: flex; flex-direction: column; gap: 6px; }
+  .field-lbl { font-size: 0.72rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+  .field-input {
+    background: #1e293b; border: 1px solid #334155; border-radius: 8px;
+    padding: 8px 12px; font-size: 0.8rem; color: #ffffff; font-family: inherit;
+  }
+  .code-block {
+    background: #020617; border: 1px solid #1e293b; border-radius: 8px;
+    padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: #38bdf8; overflow: hidden;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="tool-row">
+      <span style="font-weight: 800; font-size: 0.95rem; color: #38bdf8;">PostGIS Geosegment Editor</span>
+      <span style="font-size: 0.75rem; color: #64748b;">| Layer: Poligon Batas Dusun</span>
+    </div>
+    <div class="tool-row">
+      <div class="btn-tool btn-active">✏ Edit Vertex Node (Snap)</div>
+      <div class="btn-tool">➕ Tambah Poligon</div>
+      <div class="btn-tool">✂ Split Geometry</div>
+      <div class="btn-tool btn-save">💾 Simpan ke Database (PostGIS)</div>
+    </div>
+  </header>
+  <div class="layout-body">
+    <div class="canvas-area">
+      <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" viewBox="0 0 1080 804">
+        <polygon points="260,140 620,110 780,280 580,520 220,410" 
+                 fill="rgba(56, 189, 248, 0.28)" stroke="#38bdf8" stroke-width="3"/>
+        <!-- Edit Vertex Handles -->
+        <circle cx="260" cy="140" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="3"/>
+        <circle cx="620" cy="110" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="3"/>
+        <circle cx="780" cy="280" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="3"/>
+        <circle cx="580" cy="520" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="3"/>
+        <circle cx="220" cy="410" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="3"/>
+        
+        <!-- Active drag indicator -->
+        <circle cx="780" cy="280" r="14" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,3"/>
+      </svg>
+    </div>
+    <div class="side-inspector">
+      <div style="font-weight: 800; font-size: 0.9rem; color: #ffffff; border-bottom: 1px solid #1e293b; padding-bottom: 10px;">
+        Inspektor Geometri PostGIS
+      </div>
+      <div class="field-group">
+        <div class="field-lbl">Nama Wilayah Spasial</div>
+        <input class="field-input" value="Dusun I (Karangrau Wetan)">
+      </div>
+      <div class="field-group">
+        <div class="field-lbl">Kode Administrasi Kemendagri</div>
+        <input class="field-input" value="33.02.12.2001.01">
+      </div>
+      <div class="field-group">
+        <div class="field-lbl">Kalkulasi Luas Poligon (ST_Area)</div>
+        <input class="field-input" value="684,210.4 m² (68.42 Ha)">
+      </div>
+      <div class="field-group">
+        <div class="field-lbl">Topologi Check (ST_IsValid)</div>
+        <div style="background: #052e16; border: 1px solid #166534; color: #4ade80; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;">
+          ✓ Poligon Valid (Zero Self-Intersection)
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-lbl">WKT Export (Well-Known Text)</div>
+        <div class="code-block">
+POLYGON((109.2811 -7.4720, 109.2845 -7.4715, 109.2862 -7.4735, 109.2838 -7.4760, 109.2805 -7.4748, 109.2811 -7.4720))
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

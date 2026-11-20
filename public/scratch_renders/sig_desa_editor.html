@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>SIG Desa - Spatial Boundary & GeoJSON Polygon Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0f172a;
+    color: #f8fafc;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .editor-nav {
+    height: 56px;
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 30;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-tag {
+    background: #0284c7;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .nav-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .nav-sub {
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-save {
+    background: #10b981;
+    color: #064e3b;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-cancel {
+    background: #334155;
+    color: #cbd5e1;
+    font-size: 0.8rem;
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .editor-workspace {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+  .editor-viewport {
+    flex: 1;
+    position: relative;
+    background: #090d16;
+  }
+
+  /* Floating GIS Toolbar */
+  .floating-gis-bar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 41, 59, 0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid #475569;
+    border-radius: 12px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 20;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+  .tool-item {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    color: #94a3b8;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+  .tool-item.active {
+    background: #38bdf8;
+    color: #0c4a6e;
+    font-weight: 700;
+  }
+  .tool-sep {
+    width: 1px;
+    height: 20px;
+    background: #475569;
+  }
+
+  /* Right Attribute Inspector */
+  .inspector-panel {
+    width: 360px;
+    background: #1e293b;
+    border-left: 1px solid #334155;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 20;
+  }
+  .panel-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .attr-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .attr-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .attr-input {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #f8fafc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    outline: none;
+  }
+  .topology-hud {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .hud-head {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #34d399;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .hud-body {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #a7f3d0;
+    line-height: 1.5;
+  }
+  .geojson-preview-box {
+    background: #090d16;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: #38bdf8;
+    height: 160px;
+    overflow-y: auto;
+  }
+
+  /* SVG Editor Stage */
+  svg.editor-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+  .grid-pattern {
+    stroke: rgba(255, 255, 255, 0.04);
+    stroke-width: 1;
+  }
+  .vertex-node {
+    fill: #38bdf8;
+    stroke: #ffffff;
+    stroke-width: 2.5;
+    cursor: grab;
+    filter: drop-shadow(0 0 6px #38bdf8);
+  }
+  .vertex-active {
+    fill: #ef4444;
+    stroke: #ffffff;
+    stroke-width: 3;
+    r: 7;
+    filter: drop-shadow(0 0 10px #ef4444);
+  }
+  .guide-line {
+    stroke: #38bdf8;
+    stroke-width: 2;
+    stroke-dasharray: 4, 4;
+  }
+</style>
+</head>
+<body>
+
+  <header class="editor-nav">
+    <div class="nav-left">
+      <span class="nav-tag">ADMIN GIS</span>
+      <div>
+        <div class="nav-title">PostGIS Polygon Boundary Editor • RT 03 / RW 01</div>
+        <div class="nav-sub">Desa Sukamaju • Layer: Batas Rukun Tetangga (Spatial PostGIS)</div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-cancel">Batalkan</button>
+      <button class="btn-save">
+        <span>💾 Simpan ke PostGIS</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="editor-workspace">
+
+    <div class="editor-viewport">
+
+      <!-- Floating GIS Bar -->
+      <div class="floating-gis-bar">
+        <div class="tool-item">📍 Tambah Titik</div>
+        <div class="tool-item active">⬡ Gambar Poligon</div>
+        <div class="tool-item">✂️ Pisah Wilayah</div>
+        <div class="tool-sep"></div>
+        <div class="tool-item">📐 Hitung Luas (Ha)</div>
+        <div class="tool-item">🧲 Snapping Node (Aktif)</div>
+      </div>
+
+      <!-- SVG Map Editor Canvas -->
+      <svg class="editor-svg" viewBox="0 0 1080 840">
+        <!-- Satellite / Topo Dark Grid -->
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" class="grid-pattern" />
+          </pattern>
+        </defs>
+        <rect width="1080" height="840" fill="#0b1329" />
+        <rect width="1080" height="840" fill="url(#grid)" />
+
+        <!-- Existing Surrounding Neighbor Polygons (Ghosted) -->
+        <polygon points="120,200 440,160 480,420 180,480" fill="rgba(148, 163, 184, 0.08)" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" />
+        <text x="280" y="310" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#64748b" font-weight="600">RT 02 / RW 01 (Tetangga)</text>
+
+        <polygon points="480,420 840,360 880,620 540,680" fill="rgba(148, 163, 184, 0.08)" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" />
+        <text x="680" y="520" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#64748b" font-weight="600">RT 04 / RW 01 (Tetangga)</text>
+
+        <!-- Active Edited Polygon (RT 03 / RW 01) -->
+        <polygon points="440,160 820,130 840,360 480,420" fill="rgba(14, 165, 233, 0.25)" stroke="#38bdf8" stroke-width="3" />
+
+        <!-- Distance Annotations on Edges -->
+        <rect x="590" y="125" width="80" height="20" rx="4" fill="#1e293b" />
+        <text x="630" y="139" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8">382.4 m</text>
+
+        <rect x="430" y="280" width="75" height="20" rx="4" fill="#1e293b" />
+        <text x="467" y="294" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8">268.1 m</text>
+
+        <!-- Vertex Nodes (Interactive Handles) -->
+        <circle cx="440" cy="160" r="6" class="vertex-node" />
+        <circle cx="820" cy="130" r="6" class="vertex-node" />
+        <circle cx="840" cy="360" r="6" class="vertex-node" />
+        <!-- Selected Active Node -->
+        <circle cx="480" cy="420" class="vertex-active" />
+
+        <!-- Coordinate Tag for Active Node -->
+        <rect x="495" y="405" width="165" height="28" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1" />
+        <text x="505" y="423" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f8fafc">Lat: -7.42851, Lon: 109.24102</text>
+      </svg>
+
+    </div>
+
+    <!-- Right Inspector Sidebar -->
+    <aside class="inspector-panel">
+      <div class="panel-title">
+        <span>Inspektor Fitur Spasial</span>
+        <span style="font-size: 0.7rem; color: #38bdf8;">GeoJSON v2.1</span>
+      </div>
+
+      <div class="attr-group">
+        <label class="attr-label">Nama Poligon Wilayah</label>
+        <input type="text" class="attr-input" value="Rukun Tetangga 03 (RT 03 / RW 01)">
+      </div>
+
+      <div class="attr-group">
+        <label class="attr-label">Unit Statistik Induk</label>
+        <input type="text" class="attr-input" value="RW 01 • Dusun Krajan" readonly>
+      </div>
+
+      <div class="attr-group">
+        <label class="attr-label">Luas Kalkulasi PostGIS (ST_Area)</label>
+        <input type="text" class="attr-input" value="42.8 Hektar (428,210 m²)" readonly>
+      </div>
+
+      <div class="attr-group">
+        <label class="attr-label">Jumlah Titik Vertex</label>
+        <input type="text" class="attr-input" value="4 Titik (Polygon Tertutup Sempurna)" readonly>
+      </div>
+
+      <!-- Topology Health HUD -->
+      <div class="topology-hud">
+        <div class="hud-head">
+          <span>✓</span>
+          <span>Validasi Topologi Lolos</span>
+        </div>
+        <div class="hud-body">
+          • ST_IsValid(geom) = TRUE<br>
+          • 0 Self-Intersection detected<br>
+          • 0 Sliver/Overlap dengan RT 02 & RT 04
+        </div>
+      </div>
+
+      <div class="attr-group">
+        <label class="attr-label">Pratinjau GeoJSON Tergenerasi</label>
+        <div class="geojson-preview-box">
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[
+      [109.2384, -7.4271],
+      [109.2421, -7.4268],
+      [109.2424, -7.4289],
+      [109.2388, -7.4294],
+      [109.2384, -7.4271]
+    ]]
+  },
+  "properties": {
+    "rt": "03",
+    "rw": "01",
+    "dusun": "Krajan",
+    "area_ha": 42.82
+  }
+}
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Geodipa SPK — Evaluasi Karyawan Terbaik (Metode SAW)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1366px; height: 768px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f8fafc; color: #1e293b;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    height: 64px; background: #ffffff; border-bottom: 1px solid #e2e8f0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .top-brand { display: flex; align-items: center; gap: 12px; }
+  .logo-box {
+    width: 38px; height: 38px; background: #0284c7; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 1.1rem;
+  }
+  .title-area h1 { font-size: 1rem; font-weight: 800; color: #0f172a; }
+  .title-area p { font-size: 0.72rem; color: #64748b; font-weight: 500; }
+  
+  .layout-main { flex: 1; display: flex; padding: 20px 28px; gap: 20px; overflow: hidden; }
+  .left-content { flex: 1; display: flex; flex-direction: column; gap: 16px; overflow: hidden; }
+  
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi-card {
+    background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 14px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+  .kpi-val { font-size: 1.4rem; font-weight: 800; color: #0f172a; }
+  .kpi-lbl { font-size: 0.72rem; color: #64748b; font-weight: 600; margin-top: 2px; }
+
+  .table-box {
+    flex: 1; background: white; border: 1px solid #e2e8f0; border-radius: 14px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .table-head-bar {
+    padding: 14px 20px; border-bottom: 1px solid #f1f5f9;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; }
+  th {
+    background: #f8fafc; padding: 12px 16px; font-weight: 700; color: #475569;
+    border-bottom: 1px solid #e2e8f0; font-size: 0.72rem; text-transform: uppercase;
+  }
+  td { padding: 11px 16px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+  
+  .rank-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 50%; font-weight: 800; font-size: 0.72rem;
+  }
+  .rank-1 { background: #fef3c7; color: #d97706; border: 1px solid #fcd34d; }
+  .rank-2 { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+  .rank-3 { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+  .score-mono { font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #0f172a; }
+  
+  .right-side { width: 340px; display: flex; flex-direction: column; gap: 16px; }
+  .side-card { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px; }
+  .crit-bar { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+  .crit-lbl-row { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; color: #475569; }
+  .bar-track { height: 6px; background: #f1f5f9; border-radius: 9999px; overflow: hidden; }
+  .bar-fill { height: 100%; background: #0284c7; border-radius: 9999px; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="top-brand">
+      <div class="logo-box">GD</div>
+      <div class="title-area">
+        <h1>SPK Evaluasi Kinerja Karyawan Terbaik (Metode SAW)</h1>
+        <p>PT Geo Dipa Energi (Persero) &bull; Unit Dieng & Patuha</p>
+      </div>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <span style="font-size: 0.75rem; font-weight: 700; background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 8px;">
+        Periode: Semester I 2024
+      </span>
+      <span style="font-size: 0.75rem; font-weight: 700; background: #f0fdf4; color: #166534; padding: 6px 14px; border-radius: 8px; border: 1px solid #bbf7d0;">
+        ✓ Disetujui Pimpinan
+      </span>
+    </div>
+  </header>
+
+  <div class="layout-main">
+    <div class="left-content">
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-val">148 Pegawai</div>
+          <div class="kpi-lbl">Total Populasi Ternilai</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">5 Kriteria</div>
+          <div class="kpi-lbl">Bobot SAW Terstandarisasi</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">0.948</div>
+          <div class="kpi-lbl">Skor Preferensi Tertinggi (V₁)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">100%</div>
+          <div class="kpi-lbl">Rekonsiliasi Peer-Review</div>
+        </div>
+      </div>
+
+      <div class="table-box">
+        <div class="table-head-bar">
+          <div style="font-weight: 800; font-size: 0.88rem; color: #0f172a;">Hasil Akhir Perangkingan Preferensi (Vᵢ)</div>
+          <div style="font-size: 0.75rem; color: #64748b; font-weight: 600;">Metode: Simple Additive Weighting</div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 60px;">Rank</th>
+              <th>Nama Pegawai</th>
+              <th>Divisi / Departemen</th>
+              <th>Disiplin (25%)</th>
+              <th>Kinerja (30%)</th>
+              <th>Kerjasama (20%)</th>
+              <th>Skor Preferensi (V)</th>
+              <th>Status Kelulusan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="rank-badge rank-1">1</span></td>
+              <td><strong style="color: #0f172a;">Eko Prasetyo, S.T.</strong><br><span style="font-size: 0.7rem; color: #64748b;">NIP: 19880412-GD</span></td>
+              <td><span style="background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-weight: 600; font-size: 0.72rem;">Operasi & Pemeliharaan</span></td>
+              <td class="score-mono">96.0</td>
+              <td class="score-mono">98.0</td>
+              <td class="score-mono">92.0</td>
+              <td class="score-mono" style="color: #0284c7; font-size: 0.9rem;">0.948</td>
+              <td><span style="background: #fef3c7; color: #b45309; font-weight: 700; padding: 3px 10px; border-radius: 9999px; font-size: 0.7rem;">🏆 Terpilih Terbaik I</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-badge rank-2">2</span></td>
+              <td><strong style="color: #0f172a;">Siti Nurhaliza, M.M.</strong><br><span style="font-size: 0.7rem; color: #64748b;">NIP: 19910620-GD</span></td>
+              <td><span style="background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-weight: 600; font-size: 0.72rem;">Keuangan & SDM</span></td>
+              <td class="score-mono">94.0</td>
+              <td class="score-mono">95.0</td>
+              <td class="score-mono">90.0</td>
+              <td class="score-mono" style="color: #0f172a;">0.925</td>
+              <td><span style="background: #f0fdf4; color: #166534; font-weight: 700; padding: 3px 10px; border-radius: 9999px; font-size: 0.7rem;">Rekomendasi</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-badge rank-3">3</span></td>
+              <td><strong style="color: #0f172a;">Budi Santoso, A.Md.</strong><br><span style="font-size: 0.7rem; color: #64748b;">NIP: 19850915-GD</span></td>
+              <td><span style="background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-weight: 600; font-size: 0.72rem;">K3 & Lingkungan</span></td>
+              <td class="score-mono">90.0</td>
+              <td class="score-mono">92.0</td>
+              <td class="score-mono">88.0</td>
+              <td class="score-mono" style="color: #0f172a;">0.894</td>
+              <td><span style="background: #f0fdf4; color: #166534; font-weight: 700; padding: 3px 10px; border-radius: 9999px; font-size: 0.7rem;">Rekomendasi</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-badge" style="background: #f8fafc; color: #64748b;">4</span></td>
+              <td><strong style="color: #0f172a;">Dewi Lestari, S.Kom.</strong><br><span style="font-size: 0.7rem; color: #64748b;">NIP: 19940228-GD</span></td>
+              <td><span style="background: #f1f5f9; padding: 3px 8px; border-radius: 6px; font-weight: 600; font-size: 0.72rem;">Teknologi Informasi</span></td>
+              <td class="score-mono">88.0</td>
+              <td class="score-mono">89.0</td>
+              <td class="score-mono">85.0</td>
+              <td class="score-mono" style="color: #0f172a;">0.871</td>
+              <td><span style="background: #f1f5f9; color: #475569; font-weight: 700; padding: 3px 10px; border-radius: 9999px; font-size: 0.7rem;">Memenuhi Syarat</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="right-side">
+      <div class="side-card">
+        <div style="font-weight: 800; font-size: 0.85rem; color: #0f172a;">Bobot Kriteria SAW (W)</div>
+        <div style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">Normalisasi Bobot Total = 1.00</div>
+
+        <div class="crit-bar">
+          <div class="crit-lbl-row"><span>C1. Capaian Kinerja</span><span>30%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 30%;"></div></div>
+        </div>
+        <div class="crit-bar">
+          <div class="crit-lbl-row"><span>C2. Kedisiplinan & Presensi</span><span>25%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 25%;"></div></div>
+        </div>
+        <div class="crit-bar">
+          <div class="crit-lbl-row"><span>C3. Kerjasama Tim</span><span>20%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 20%;"></div></div>
+        </div>
+        <div class="crit-bar">
+          <div class="crit-lbl-row"><span>C4. Inisiatif & Problem Solving</span><span>15%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 15%;"></div></div>
+        </div>
+        <div class="crit-bar">
+          <div class="crit-lbl-row"><span>C5. Loyalitas & Core Values</span><span>10%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div>
+        </div>
+      </div>
+
+      <div class="side-card" style="background: #f0f9ff; border-color: #bae6fd;">
+        <div style="font-weight: 800; font-size: 0.82rem; color: #0369a1;">Rumus Preferensi SAW</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #0284c7; margin-top: 6px; font-weight: 700;">
+          V_i = ∑ (w_j * r_ij)
+        </div>
+        <p style="font-size: 0.72rem; color: #0369a1; margin-top: 6px; line-height: 1.4;">
+          Menjumlahkan perkalian matriks ternormalisasi (R) dengan bobot kriteria (W) untuk menghasilkan perangkingan deterministik bebas bias.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

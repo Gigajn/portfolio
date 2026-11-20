@@ -1,0 +1,424 @@
+[
+  {
+    "id": "habibie-club-genius",
+    "title": "Habibie Club Genius",
+    "category": "fullstack",
+    "category_label": "Fullstack & EdTech",
+    "summary": "Platform bimbingan belajar privat interaktif multi-role dengan sistem booking jadwal guru real-time, integrasi payment gateway Midtrans Snap, MinIO object storage, dan Go Gin backend.",
+    "tech_stack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Go (Gin)",
+      "PostgreSQL",
+      "MinIO",
+      "Midtrans Snap",
+      "Docker"
+    ],
+    "screenshots": [
+      "/screenshots/habibie_home.png",
+      "/screenshots/habibie_services.png",
+      "/screenshots/habibie_login.png",
+      "/screenshots/habibie_checkout.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/habibie-club-genius",
+    "features": [
+      "Pemesanan slot les privat dengan pengecekan ketersediaan jadwal guru",
+      "Manajemen pengguna multi-peran: Siswa, Mentor/Pengajar, dan Administrator",
+      "Integrasi pembayaran online dengan Midtrans Snap",
+      "Penyimpanan berkas materi dan dokumen les via MinIO object storage",
+      "Pengujian fungsionalitas fitur dan alur pemesanan secara menyeluruh"
+    ],
+    "architecture": "Frontend Next.js App Router terhubung ke REST API Go Gin yang berkomunikasi dengan database PostgreSQL dan MinIO object storage."
+  },
+  {
+    "id": "erp-snouvier",
+    "title": "ERP Snouvier (Celvre POS & Omnichannel)",
+    "category": "fullstack",
+    "category_label": "Enterprise & POS",
+    "summary": "Solusi Enterprise Resource Planning (ERP) & Point of Sale (POS) omnichannel terpadu untuk operasional bisnis ritel modern, terintegrasi WhatsApp Automation bot via n8n & Evolution API.",
+    "tech_stack": [
+      "Flutter (Dart)",
+      "Web ERP (Celvre)",
+      "n8n",
+      "Evolution WhatsApp API",
+      "PostgreSQL",
+      "REST API"
+    ],
+    "screenshots": [
+      "/screenshots/snouvier_pos_tablet.png",
+      "/screenshots/snouvier_kasir_keranjang.png",
+      "/screenshots/snouvier_kasir_qris.png",
+      "/screenshots/snouvier_katalog.png",
+      "/screenshots/snouvier_qris_tablet.png"
+    ],
+    "live_url": "https://snouvier.celvre.tech",
+    "github_url": "https://github.com/Gigajn/erp-snouvier",
+    "features": [
+      "Aplikasi Kasir Mobile POS cepat berbasis Flutter dengan struk termal dan offline-mode",
+      "Platform Web ERP Celvre untuk manajemen gudang, master barang, dan neraca laba-rugi",
+      "Bot notifikasi otomatis nota dan update transaksi ke WhatsApp pelanggan via Evolution API",
+      "Orkestrasi alur kerja tanpa kode (workflow engine) menggunakan automasi n8n",
+      "Sinkronisasi multi-outlet dan pelaporan analitik omset harian secara terpusat"
+    ],
+    "architecture": "Arsitektur berbasis domain live di snouvier.celvre.tech. Kasir Flutter berinteraksi dengan API inti, yang memicu webhook n8n untuk integrasi pesan WhatsApp instan ke nomor pembeli."
+  },
+  {
+    "id": "sig-desa",
+    "title": "SIG Desa: Sistem Informasi Geografis & Data Spasial",
+    "category": "fullstack",
+    "category_label": "Sistem Informasi Geografis",
+    "summary": "Sistem Informasi Geografis (GIS) profil desa berbasis Laravel, PostGIS, dan Leaflet. Menampilkan data spasial wilayah, batas administratif (Dusun, RW, RT), dan data statistik kependudukan.",
+    "tech_stack": [
+      "Laravel",
+      "PostgreSQL",
+      "PostGIS",
+      "Leaflet.js",
+      "Tailwind CSS",
+      "Docker"
+    ],
+    "screenshots": [
+      "/screenshots/sig_desa.png",
+      "/screenshots/sig_desa_spatial_editor.png",
+      "/screenshots/sig_desa_resident_portal.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/sig-desa",
+    "features": [
+      "Arsitektur multi-tenant berbasis host: setiap desa memiliki data spasial terpisah",
+      "Editor geometri PostGIS untuk batas Dusun, RW, dan RT dengan validasi topologi",
+      "Peta tematik interaktif (Leaflet) dengan layer fasilitas umum, zonasi pertanian, dan legenda",
+      "Agregasi data statistik kependudukan otomatis tersinkronisasi ke poligon batas wilayah",
+      "Portal informasi mandiri bagi warga untuk pencarian data kependudukan desa"
+    ],
+    "architecture": "Tenant Resolver memetakan Host Header ke data desa terkait. PostgreSQL dengan PostGIS mengelola query geospasial poligon dan titik fasilitas desa."
+  },
+  {
+    "id": "geodipa-spk",
+    "title": "SPK Pemilihan Karyawan Terbaik (Geodipa)",
+    "category": "fullstack",
+    "category_label": "Decision Support (SPK)",
+    "summary": "Sistem Pendukung Keputusan (SPK) pemilihan karyawan terbaik menggunakan metode Simple Additive Weighting (SAW) dengan tie-break deterministik dan alur penilaian peer-to-peer antar rekan divisi.",
+    "tech_stack": [
+      "Laravel 12",
+      "PostgreSQL 16",
+      "Blade",
+      "Tailwind CSS",
+      "Fortify Auth",
+      "DomPDF"
+    ],
+    "screenshots": [
+      "/screenshots/geodipa_spk.png",
+      "/screenshots/geodipa_matrix_saw.png",
+      "/screenshots/geodipa_peer_assessment.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/employee_assessment",
+    "features": [
+      "Implementasi algoritma SAW: matriks normalisasi bobot kriteria benefit/cost dan perangkingan",
+      "Sistem tie-break deterministik untuk memastikan perolehan pemenang tunggal yang objektif",
+      "Penilaian antar rekan kerja satu divisi (peer-review) dengan pencegahan menilai diri sendiri",
+      "Otorisasi multi-peran: Administrator/HRD, Karyawan, dan Pimpinan dengan Fortify",
+      "Alur approval hasil perangkingan oleh Pimpinan sebelum publikasi dan cetak laporan PDF resmi"
+    ],
+    "architecture": "Dibangun di atas Laravel 12 dengan database PostgreSQL. Service layer memisahkan kalkulasi matematis normalisasi SAW dari controller untuk menjamin performa dan akurasi rekonsiliasi data."
+  },
+  {
+    "id": "stock-management-bge",
+    "title": "Stock Management System & Shopify Sync (BGE)",
+    "category": "fullstack",
+    "category_label": "Inventory & Sync",
+    "summary": "Sistem manajemen stok gudang dan penjualan ritel multi-channel yang menyinkronkan data katalog produk, kategori, varian warna/ukuran, dan inventaris antara toko offline dan toko online Shopify.",
+    "tech_stack": [
+      "Laravel",
+      "Eloquent ORM",
+      "Shopify GraphQL/REST API",
+      "Vite",
+      "Tailwind CSS"
+    ],
+    "screenshots": [
+      "/screenshots/stock_management_bge.png",
+      "/screenshots/stock_shopify_sync_logs.png",
+      "/screenshots/stock_warehouse_variants.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/BGE-Supply",
+    "features": [
+      "Staging dan rekonsiliasi data produk offline dan online via tabel OfflineProductStaging",
+      "Sinkronisasi kuantitas stok otomatis dua arah untuk mencegah overselling pada channel e-commerce",
+      "Pencatatan riwayat transaksi penjualan kasir (Sale & SaleItem) dengan audit log lengkap",
+      "Manajemen varian produk kompleks: SKU, barcode scanner, harga bertingkat, dan atribut varian",
+      "Audit trail log sinkronisasi terperinci (SyncLog) untuk melacak status transaksi data API"
+    ],
+    "architecture": "Aplikasi menghubungkan database pos kasir internal dengan Shopify Webhook & REST API. Kuantitas stok berkurang secara real-time di kedua sisi saat ada transaksi di kasir fisik maupun di e-commerce."
+  },
+  {
+    "id": "jackup",
+    "title": "Jackup: Perkakas Migrasi & Sinkronisasi Server (Rust)",
+    "category": "systems",
+    "category_label": "Systems & CLI",
+    "stage_badge": "Sedang Dalam Fase Pengembangan",
+    "summary": "Perkakas baris perintah (CLI) dan service daemon di Linux yang dibangun dengan Rust untuk sinkronisasi dan migrasi volume data kontainer. Saat ini proyek berada dalam tahap pengembangan aktif berfokus pada protokol jaringan dan modul enkripsi.",
+    "tech_stack": [
+      "Rust (11 Crates)",
+      "Tokio Async",
+      "Argon2id",
+      "ChaCha20-Poly1305",
+      "Linux Namespaces",
+      "Protobuf/Serde"
+    ],
+    "screenshots": [
+      "/screenshots/jackup_cli.png",
+      "/screenshots/jackup_dry_run.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/Jackup",
+    "features": [
+      "Sedang dalam tahap pengembangan aktif pada layer sistem dan CLI",
+      "Antarmuka Command Line Interface (CLI) dan daemon latar belakang untuk Linux",
+      "Workspace multi-crate independen (core, crypto, orchestrator, cli)",
+      "Penyimpanan data lokal dengan enkripsi Argon2id dan ChaCha20-Poly1305",
+      "Protokol pengiriman data terstruktur dengan validasi checksum"
+    ],
+    "architecture": "Workspace modular Rust. CLI mengirim instruksi ke service daemon target untuk mengelola sinkronisasi volume data."
+  },
+  {
+    "id": "apps-penyakit-padi",
+    "title": "Panen Tanam: Aplikasi Deteksi Penyakit Padi (Android)",
+    "category": "mobile",
+    "category_label": "Mobile Android & AI",
+    "stage_badge": "Sedang Dalam Fase Pengembangan",
+    "summary": "Aplikasi mobile Android (Kotlin & Jetpack Compose) untuk deteksi penyakit tanaman padi. Proyek saat ini dalam tahap pengembangan aktif untuk melatih model deteksi visual dan rekomendasi perawatan tanaman bagi petani.",
+    "tech_stack": [
+      "Kotlin (Jetpack Compose)",
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "Terraform",
+      "Agent Skills"
+    ],
+    "screenshots": [
+      "/screenshots/panen_tanam_scan.png",
+      "/screenshots/panen_tanam_mobile.png",
+      "/screenshots/panen_tanam_treatment.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/panenTanam",
+    "features": [
+      "Sedang dalam tahap pengembangan aktif dan pengujian model deteksi penyakit tanaman",
+      "Antarmuka Android native berbasis Kotlin & Jetpack Compose",
+      "Model deteksi penyakit daun padi (Hawar Daun, Blas, Tungro)",
+      "Informasi rekomendasi penanganan dan dosis perawatan tanaman",
+      "Pencatatan riwayat kondisi tanaman dan perkiraan faktor risiko cuaca"
+    ],
+    "architecture": "Aplikasi Android berkomunikasi dengan backend API untuk memproses foto tanaman dan mengembalikan hasil deteksi penyakit beserta saran perawatannya."
+  },
+  {
+    "id": "klasifikasi-stunting",
+    "title": "Klasifikasi Stunting Balita (Deep Learning ANN)",
+    "category": "ai",
+    "category_label": "Deep Learning & Health",
+    "summary": "Sistem deteksi dini dan klasifikasi stunting balita berbasis Artificial Neural Network (ANN) menggunakan parameter antropometri balita sesuai standar pertumbuhan WHO, disajikan dalam antarmuka Streamlit reaktif.",
+    "tech_stack": [
+      "Python",
+      "TensorFlow / Keras",
+      "Streamlit",
+      "Pandas",
+      "Scikit-Learn",
+      "Altair"
+    ],
+    "screenshots": [
+      "/screenshots/klasifikasi_stunting.png",
+      "/screenshots/stunting_accuracy.png",
+      "/screenshots/stunting_loss.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/Childer-Growth-Guardian",
+    "features": [
+      "Model Jaringan Saraf Tiruan Sequential (Dense 8 → 16 → 32) dengan Batch Normalization dan Dropout",
+      "Form skrining fisik balita real-time (Usia 1-5 tahun, Jenis Kelamin, Tinggi Badan, Berat Badan, BMI)",
+      "Kalkulasi deviasi terhadap median pertumbuhan WHO dan rekomendasi medis preventif",
+      "Eksplorasi dataset antropometri dengan visualisasi interaktif distribusi data",
+      "Visualisasi kurva training accuracy dan evaluasi loss model"
+    ],
+    "architecture": "Dataset antropometri dinormalisasi via StandardScaler, lalu diproses oleh neural network Keras. Model disajikan dalam antarmuka Streamlit reaktif yang memberikan hasil deteksi dan edukasi gizi secara instan."
+  },
+  {
+    "id": "klasifikasi-bansos",
+    "title": "Klasifikasi Bansos PKH & BPNT (Desa Karangrau)",
+    "category": "ai",
+    "category_label": "Machine Learning",
+    "summary": "Aplikasi Machine Learning klasifikasi kelayakan bantuan sosial (PKH & BPNT) untuk warga Desa Karangrau dengan pendekatan strategi One-vs-Rest (OvR) dan One-vs-One (OvO) serta threshold tuning dinamis.",
+    "tech_stack": [
+      "Python",
+      "Streamlit",
+      "XGBoost",
+      "Random Forest",
+      "Scikit-Learn",
+      "Joblib",
+      "Pandas"
+    ],
+    "screenshots": [
+      "/screenshots/klasifikasi_bansos.png",
+      "/screenshots/bansos_criteria_weights.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/Model-Bansos-Karangrau",
+    "features": [
+      "Model multiclass classifier terlatih untuk memprediksi kelayakan PKH dan BPNT secara terpisah",
+      "Pengaturan ambang batas probabilitas (threshold slider) dinamis untuk penyesuaian kuota desa",
+      "Mode input fleksibel: data simulasi demo, formulir manual perorangan, dan upload berkas batch",
+      "Indikator kondisi kemiskinan: sanitasi jamban, bahan dinding/lantai, tanggungan anak sekolah, lansia",
+      "Ekspor laporan penerima rekomendasi bantuan untuk transparansi musyawarah desa"
+    ],
+    "architecture": "Fitur demografi diolah dengan One-Hot Encoding dan diselaraskan ke pipeline model Joblib. Nilai probabilitas dikomparasikan terhadap threshold yang dapat diatur untuk menghasilkan keputusan kelayakan bantuan."
+  },
+  {
+    "id": "tiktok-scrapper",
+    "title": "TikTok Comment Scraper & NLP Judol Detector",
+    "category": "ai",
+    "category_label": "NLP & Web Scraping",
+    "summary": "Sistem penambangan komentar TikTok otomatis berbasis browser stealth yang dipadukan dengan pipeline klasifikasi teks Machine Learning untuk mendeteksi promosi judi online (judol) dan spam promosi.",
+    "tech_stack": [
+      "Python",
+      "Streamlit",
+      "Playwright",
+      "TF-IDF Vectorizer",
+      "Multinomial Naive Bayes",
+      "Pandas"
+    ],
+    "screenshots": [
+      "/screenshots/tiktok_scraper.png",
+      "/screenshots/tiktok_judol_analytics.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/tiktok-comment-scraper",
+    "features": [
+      "Web scraper headless dengan teknik anti-bot stealth patches untuk memanen komentar video TikTok",
+      "Preprocessing teks bahasa Indonesia: pembersihan emotikon, tautan mencurigakan, dan normalisasi slang",
+      "Klasifikasi 3 kelas: Promosi Judi Online, Promosi Non-Judol, dan Komentar Normal",
+      "Dashboard modern dengan analisis persentase komentar spam dan multi-link scraping",
+      "Ekspor dataset komentar terlabel ke format CSV/Excel untuk keperluan riset lanjutan"
+    ],
+    "architecture": "Scraper mengekstrak komentar langsung dari DOM TikTok dengan injeksi evasif. Teks diproses oleh TF-IDF Vectorizer dan diklasifikasikan oleh Multinomial Naive Bayes dengan evaluasi metrik precision & recall."
+  },
+  {
+    "id": "dairy-apps",
+    "title": "LifeChapter (AI Personal Diary & Memoir)",
+    "category": "mobile",
+    "category_label": "Mobile & AI",
+    "summary": "Aplikasi mobile AI diary pribadi (React Native Expo & Flutter) yang mengubah catatan harian menjadi narasi personal, analisis mood, bab cerita bulanan, dan buku memoir kehidupan.",
+    "tech_stack": [
+      "React Native (Expo)",
+      "Flutter",
+      "TypeScript",
+      "Expo Router",
+      "SQLite",
+      "AI LLM Prompting"
+    ],
+    "screenshots": [
+      "/screenshots/dairy_apps_timeline.png",
+      "/screenshots/dairy_apps.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/LifeChapter-memoir-app",
+    "features": [
+      "Pencatatan jurnal harian cerdas dengan tracking mood emosional interaktif",
+      "Pengubahan catatan mentah menjadi narasi cerita yang berkesan menggunakan prompt AI personal",
+      "Penyimpanan lokal terenkripsi di perangkat pengguna berbasis SQLite dan Biometric Auth",
+      "Generasi rangkuman mingguan dan chapter bulanan yang bisa diekspor menjadi buku memoir",
+      "Arsitektur cross-platform siap rilis untuk platform Android dan iOS"
+    ],
+    "architecture": "Frontend mobile dibangun dengan React Native Expo modern dan arsitektur feature-based clean code di /src/features (diary, personality, subscription, analytics) serta implementasi pendamping di Flutter."
+  },
+  {
+    "id": "split-downloader-youtube",
+    "title": "YouTube Split Downloader & MP3 Splitter",
+    "category": "fullstack",
+    "category_label": "Fullstack & Media Utility",
+    "summary": "Aplikasi web media pengunduh audio dan video YouTube dengan konkurensi multi-worker di latar belakang, integrasi ekstraksi cookie browser otomatis, dan pemotong album musik berdasarkan timestamp.",
+    "tech_stack": [
+      "Python",
+      "Streamlit",
+      "yt-dlp",
+      "FFmpeg",
+      "Pydub",
+      "Multithreading"
+    ],
+    "screenshots": [
+      "/screenshots/split_downloader.png",
+      "/screenshots/split_downloader_editor.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/split-downloader-youtube",
+    "features": [
+      "Unduh video dan audio YouTube dalam berbagai opsi resolusi dan bitrate kualitas tinggi",
+      "Pemotong audio otomatis (Track Splitter) berdasarkan daftar timestamp di deskripsi video/komentar",
+      "Job Manager berbasis antrean thread pekerja independen untuk proses unduhan simultan",
+      "Deteksi dan ekstraksi cookie browser otomatis untuk mengunduh konten age-restricted / private",
+      "Pengemasan otomatis hasil potongan lagu ke dalam satu berkas arsip .zip sekali klik"
+    ],
+    "architecture": "Aplikasi memanfaatkan yt-dlp untuk stream fetching dan FFmpeg/Pydub untuk pemotongan segmen audio secara lossless. Status unduhan dipantau secara real-time via state listener Streamlit."
+  },
+  {
+    "id": "games-ar",
+    "title": "Interactive Augmented Reality (Unity 3D)",
+    "category": "mobile",
+    "category_label": "AR & Game Dev",
+    "summary": "Proyek game interaktif berbasis Augmented Reality (AR) yang menggabungkan tracking dunia nyata dengan model objek 3D interaktif menggunakan engine Unity dan pemrograman C#.",
+    "tech_stack": [
+      "Unity 3D",
+      "C#",
+      "AR Foundation / Vuforia",
+      "Blender 3D Models",
+      "Shader Graph"
+    ],
+    "screenshots": [
+      "/screenshots/games_ar/android_large_8.png",
+      "/screenshots/games_ar/character_4.png",
+      "/screenshots/games_ar/character_8.png",
+      "/screenshots/games_ar/character_10.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/interactive-ar-unity3d",
+    "features": [
+      "Image Target / Marker-based AR: memproyeksikan karakter dan aset game 3D tepat di atas kartu target",
+      "Interaksi kontrol sentuh pengguna untuk menggerakkan dan memicu animasi karakter di ruang nyata",
+      "Implementasi pencahayaan dinamis (lighting estimation) agar objek 3D membaur dengan lingkungan",
+      "Struktur project Unity C# modular dengan pemisahan Assembly Editor dan Runtime",
+      "Dioptimalkan untuk performa frame rate tinggi pada perangkat mobile Android"
+    ],
+    "architecture": "Engine Unity mengolah video feed kamera ponsel, mendeteksi fitur bidang gambar referensi, dan merekonstruksi matriks transformasi pose spasial secara real-time untuk meletakkan prefab 3D."
+  },
+  {
+    "id": "oodin-games",
+    "title": "Oodin Games: Traditional Transport Game Assets",
+    "category": "mobile",
+    "category_label": "Game Design & 2D",
+    "summary": "Paket rancangan desain aset game 2D bertema kendaraan tradisional khas nusantara (Bajaj, Dokar, Becak) lengkap dengan sistem tombol antarmuka UI dan arsitektur alur permainan.",
+    "tech_stack": [
+      "2D Vector Design",
+      "Draw.io Architecture",
+      "UI/UX Game Design",
+      "Sprite Optimization"
+    ],
+    "screenshots": [
+      "/screenshots/oodin/odin_games_logo.png",
+      "/screenshots/oodin/logo_oodin_fix.png",
+      "/screenshots/oodin/dokar.png",
+      "/screenshots/oodin/bajaj.png",
+      "/screenshots/oodin/becak.png"
+    ],
+    "live_url": "",
+    "github_url": "https://github.com/Gigajn/oodin-traditional-transport-games",
+    "features": [
+      "Aset kendaraan tradisional modular: komponen bodi, roda terpisah, dan kusir/pengemudi",
+      "Desain antarmuka tombol grafis interaktif (Start, Play, Settings, Navigation)",
+      "Diagram alur gameplay dan transisi level terstruktur berbasis Draw.io",
+      "Format visual ringan berkualitas tinggi siap integrasi ke engine game Unity atau Godot",
+      "Nuansa grafis lokal khas budaya transportasi Indonesia yang ramah keluarga"
+    ],
+    "architecture": "Koleksi aset grafis modular beresolusi tinggi dengan atlas sprite terpotong rapi yang dirancang untuk mempermudah animasi fisika roda berputar dan gerakan kendaraan di game side-scrolling 2D."
+  }
+]

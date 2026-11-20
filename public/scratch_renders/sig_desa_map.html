@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>SIG Desa Sukamaju - Peta Tematik & Batas Wilayah</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  /* Topbar Tenant Navigation */
+  .sig-header {
+    height: 60px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 30;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-emblem {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  }
+  .tenant-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tenant-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    padding: 2px 8px;
+    border-radius: 9999px;
+  }
+  .tenant-sub {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+  .top-tools {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .basemap-switch {
+    display: flex;
+    background: #f1f5f9;
+    padding: 3px;
+    border-radius: 8px;
+    gap: 2px;
+    border: 1px solid #e2e8f0;
+  }
+  .basemap-opt {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #64748b;
+  }
+  .basemap-opt.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .btn-admin-login {
+    background: #0f172a;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Main Workspace */
+  .gis-container {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Left Panel GIS */
+  .gis-panel {
+    width: 380px;
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.03);
+  }
+  .panel-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .panel-header h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .panel-header p {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .search-box {
+    margin-top: 12px;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 8px 12px 8px 34px;
+    font-size: 0.8rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    background: #f8fafc;
+  }
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 0.85rem;
+  }
+  .panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+    margin-bottom: 8px;
+  }
+  .category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 9999px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
+    cursor: pointer;
+  }
+  .chip.active {
+    background: #059669;
+    color: white;
+    border-color: #059669;
+  }
+  .thematic-select-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .thematic-select-box select {
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #0f172a;
+    outline: none;
+    margin-top: 6px;
+  }
+  .stat-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .stat-card-mini {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .stat-card-mini .val {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .stat-card-mini .lbl {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-top: 2px;
+  }
+
+  /* Active Feature Detail Card */
+  .active-feature-card {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .feature-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #059669;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .feature-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #064e3b;
+    margin: 2px 0 6px;
+  }
+  .feature-attrs {
+    font-size: 0.75rem;
+    color: #047857;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .feature-attrs span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+  }
+
+  /* Map Canvas */
+  .map-canvas-wrapper {
+    flex: 1;
+    position: relative;
+    background: #e2e8f0;
+    overflow: hidden;
+  }
+  .leaflet-map-mock {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #d4e0ce; /* Cartographic terrain tone */
+  }
+
+  /* Map Controls */
+  .map-nav-controls {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .nav-btn {
+    width: 36px;
+    height: 36px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #334155;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  }
+  .map-legend-hud {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 14px 18px;
+    z-index: 10;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    min-width: 240px;
+  }
+  .legend-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #475569;
+    margin-bottom: 8px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: #1e293b;
+    margin-bottom: 6px;
+  }
+  .legend-color {
+    width: 16px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1.5px solid;
+  }
+  .coord-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: rgba(15, 23, 42, 0.85);
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    z-index: 10;
+  }
+
+  /* SVG Map Layer Elements */
+  svg.map-svg-layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+  .polygon-dusun-1 {
+    fill: rgba(16, 185, 129, 0.28);
+    stroke: #059669;
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    cursor: pointer;
+  }
+  .polygon-dusun-2 {
+    fill: rgba(59, 130, 246, 0.25);
+    stroke: #2563eb;
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    cursor: pointer;
+  }
+  .polygon-dusun-3 {
+    fill: rgba(245, 158, 11, 0.25);
+    stroke: #d97706;
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    cursor: pointer;
+  }
+  .river-line {
+    fill: none;
+    stroke: #38bdf8;
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+  .road-main {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 5;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.4));
+  }
+  .road-sub {
+    fill: none;
+    stroke: #fed7aa;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .pin-marker {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .pin-marker:hover {
+    transform: scale(1.15);
+  }
+  .pin-pulse {
+    animation: pulse-ring 2s infinite;
+  }
+  @keyframes pulse-ring {
+    0% { r: 6px; opacity: 1; }
+    100% { r: 18px; opacity: 0; }
+  }
+  .hud-badge-floating {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #0f172a;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+  }
+  .hud-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="sig-header">
+    <div class="brand-group">
+      <div class="logo-emblem">🗺️</div>
+      <div>
+        <div class="tenant-title">
+          <span>Pemerintah Desa Sukamaju</span>
+          <span class="tenant-badge">Tenant Aktif</span>
+        </div>
+        <div class="tenant-sub">Kecamatan Banyumas • Kabupaten Banyumas • Jawa Tengah</div>
+      </div>
+    </div>
+    <div class="top-tools">
+      <div class="basemap-switch">
+        <div class="basemap-opt active">Peta Topografi</div>
+        <div class="basemap-opt">Citra Satelit</div>
+        <div class="basemap-opt">OpenStreetMap</div>
+      </div>
+      <a href="#" class="btn-admin-login">
+        <span>🔒 Panel Admin Desa</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Workspace -->
+  <div class="gis-container">
+
+    <!-- Left Panel GIS -->
+    <aside class="gis-panel">
+      <div class="panel-header">
+        <h2>Navigasi Geografis & Spasial</h2>
+        <p>Eksplorasi batas wilayah, sarana desa, dan unit RT/RW</p>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" value="Batas Dusun I Krajan" placeholder="Cari RT, RW, atau objek...">
+        </div>
+      </div>
+
+      <div class="panel-content">
+        <div>
+          <div class="section-label">Filter Kategori Objek</div>
+          <div class="category-chips">
+            <div class="chip active">Semua (24)</div>
+            <div class="chip">Pendidikan (4)</div>
+            <div class="chip">Kesehatan (3)</div>
+            <div class="chip">Ibadah (8)</div>
+            <div class="chip">Pertanian (9)</div>
+          </div>
+        </div>
+
+        <div class="thematic-select-box">
+          <div class="section-label">Layer Tematik Aktif</div>
+          <select>
+            <option>Batas Wilayah Administratif (Dusun & RT)</option>
+            <option>Peta Zonasi Pertanian & Irigasi</option>
+            <option>Sebaran Fasilitas Pelayanan Publik</option>
+          </select>
+        </div>
+
+        <!-- Active Feature Details Card -->
+        <div class="active-feature-card">
+          <div class="feature-tag">Objek Spasial Terpilih</div>
+          <div class="feature-name">Dusun I Krajan (Batas Administrasi)</div>
+          <div class="feature-attrs">
+            <div>• Kode Unit: <span>ADM-DS-3302-01</span></div>
+            <div>• Luas Wilayah: <strong>412.3 Hektar</strong></div>
+            <div>• Populasi: <strong>2,140 Jiwa (684 KK)</strong></div>
+            <div>• Struktur: 6 RW, 18 RT</div>
+            <div>• Validasi PostGIS: <span>ST_IsValid() = TRUE</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-label">Ringkasan Wilayah Sukamaju</div>
+          <div class="stat-mini-grid">
+            <div class="stat-card-mini">
+              <div class="val">4,856</div>
+              <div class="lbl">Total Penduduk (Jiwa)</div>
+            </div>
+            <div class="stat-card-mini">
+              <div class="val">1,420</div>
+              <div class="lbl">Kepala Keluarga (KK)</div>
+            </div>
+            <div class="stat-card-mini">
+              <div class="val">842.5 Ha</div>
+              <div class="lbl">Luas Terpetakan</div>
+            </div>
+            <div class="stat-card-mini">
+              <div class="val">48 RT</div>
+              <div class="lbl">Unit RT Terverifikasi</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Map Canvas Area -->
+    <main class="map-canvas-wrapper">
+
+      <div class="map-nav-controls">
+        <div class="nav-btn" title="Zoom In">+</div>
+        <div class="nav-btn" title="Zoom Out">−</div>
+        <div class="nav-btn" title="Reset Pandangan" style="font-size: 0.85rem;">⌂</div>
+        <div class="nav-btn" title="Layer Switcher" style="font-size: 0.85rem;">◫</div>
+      </div>
+
+      <div class="hud-badge-floating">
+        <span class="hud-dot"></span>
+        <span>Host: sukamaju.sigdesa.id (Multi-Tenant Engine)</span>
+      </div>
+
+      <!-- Map SVG Cartography -->
+      <svg class="map-svg-layer" viewBox="0 0 1060 840">
+        <!-- Background Terrain & Fields -->
+        <rect width="1060" height="840" fill="#d9e5d4"/>
+        
+        <!-- Farmland patterns -->
+        <path d="M 0 0 L 400 0 L 350 220 L 0 180 Z" fill="#cbe0c1" opacity="0.6"/>
+        <path d="M 700 0 L 1060 0 L 1060 300 L 750 260 Z" fill="#d0e5c6" opacity="0.6"/>
+        <path d="M 0 600 L 320 540 L 280 840 L 0 840 Z" fill="#cbe0c1" opacity="0.6"/>
+        <path d="M 800 500 L 1060 550 L 1060 840 L 760 840 Z" fill="#d0e5c6" opacity="0.6"/>
+
+        <!-- River System (Sungai Serayu Branch) -->
+        <path class="river-line" d="M 50 840 C 200 680, 240 500, 380 430 C 520 360, 680 400, 780 280 C 860 180, 920 80, 1060 20" />
+        
+        <!-- Main Roads Network -->
+        <path class="road-main" d="M 0 380 Q 300 390 530 420 T 1060 400" />
+        <path class="road-main" d="M 520 0 Q 530 380 540 840" />
+        
+        <!-- Sub Roads -->
+        <path class="road-sub" d="M 120 180 Q 280 260 400 240 T 700 200" />
+        <path class="road-sub" d="M 280 520 Q 420 620 600 590 T 900 660" />
+        <path class="road-sub" d="M 720 220 Q 820 400 780 620" />
+
+        <!-- Polygons: Boundaries of Village Dusun -->
+        <!-- Dusun I Krajan (Selected & Highlighted) -->
+        <g>
+          <polygon class="polygon-dusun-1" points="160,190 480,180 530,390 440,540 220,510 140,360" />
+          <!-- Centroid Label -->
+          <rect x="235" y="325" width="180" height="42" rx="8" fill="#ffffff" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.15))"/>
+          <text x="325" y="344" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="12" fill="#065f46">DUSUN I KRAJAN</text>
+          <text x="325" y="359" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#047857">412.3 Ha • 2,140 Jiwa</text>
+        </g>
+
+        <!-- Dusun II Waringin -->
+        <g>
+          <polygon class="polygon-dusun-2" points="530,170 880,150 940,360 760,490 540,410" />
+          <rect x="660" y="270" width="190" height="42" rx="8" fill="#ffffff" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.15))"/>
+          <text x="755" y="289" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="12" fill="#1e40af">DUSUN II WARINGIN</text>
+          <text x="755" y="304" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2563eb">265.4 Ha • 1,620 Jiwa</text>
+        </g>
+
+        <!-- Dusun III Karanganyar -->
+        <g>
+          <polygon class="polygon-dusun-3" points="420,550 750,510 820,720 580,780 340,710" />
+          <rect x="520" y="620" width="190" height="42" rx="8" fill="#ffffff" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.15))"/>
+          <text x="615" y="639" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="12" fill="#92400e">DUSUN III KARANGANYAR</text>
+          <text x="615" y="654" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#d97706">164.8 Ha • 1,096 Jiwa</text>
+        </g>
+
+        <!-- Point Markers with Icons -->
+        <!-- Balai Desa Sukamaju (Main Gov Center) -->
+        <g class="pin-marker" transform="translate(490, 395)">
+          <circle cx="0" cy="0" r="14" fill="#ef4444" filter="drop-shadow(0 3px 6px rgba(239,68,68,0.4))"/>
+          <text x="0" y="4" text-anchor="middle" font-size="12" fill="white">🏛️</text>
+          <rect x="-70" y="-36" width="140" height="24" rx="6" fill="#1e293b" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.2))"/>
+          <text x="0" y="-20" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="10" fill="white">Kantor Balai Desa</text>
+        </g>
+
+        <!-- Puskesmas Pembantu -->
+        <g class="pin-marker" transform="translate(320, 440)">
+          <circle cx="0" cy="0" r="12" fill="#0284c7" filter="drop-shadow(0 3px 6px rgba(2,132,199,0.4))"/>
+          <text x="0" y="4" text-anchor="middle" font-size="11" fill="white">🏥</text>
+          <rect x="-65" y="-32" width="130" height="22" rx="5" fill="#0f172a"/>
+          <text x="0" y="-17" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="9" fill="white">Puskesmas Pembantu</text>
+        </g>
+
+        <!-- SD Negeri 1 Sukamaju -->
+        <g class="pin-marker" transform="translate(380, 240)">
+          <circle cx="0" cy="0" r="12" fill="#10b981" filter="drop-shadow(0 3px 6px rgba(16,185,129,0.4))"/>
+          <text x="0" y="4" text-anchor="middle" font-size="11" fill="white">🏫</text>
+          <rect x="-60" y="-32" width="120" height="22" rx="5" fill="#0f172a"/>
+          <text x="0" y="-17" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="9" fill="white">SDN 1 Sukamaju</text>
+        </g>
+
+        <!-- Lumbung Pangan / Pertanian -->
+        <g class="pin-marker" transform="translate(710, 360)">
+          <circle cx="0" cy="0" r="12" fill="#d97706" filter="drop-shadow(0 3px 6px rgba(217,119,6,0.4))"/>
+          <text x="0" y="4" text-anchor="middle" font-size="11" fill="white">🌾</text>
+          <rect x="-65" y="-32" width="130" height="22" rx="5" fill="#0f172a"/>
+          <text x="0" y="-17" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="9" fill="white">Lumbung Pangan Desa</text>
+        </g>
+
+      </svg>
+
+      <!-- Map Legend Floating HUD -->
+      <div class="map-legend-hud">
+        <div class="legend-title">Legenda Peta Spasial</div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: rgba(16,185,129,0.3); border-color: #059669;"></div>
+          <span>Batas Dusun I Krajan</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: rgba(59,130,246,0.3); border-color: #2563eb;"></div>
+          <span>Batas Dusun II Waringin</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: rgba(245,158,11,0.3); border-color: #d97706;"></div>
+          <span>Batas Dusun III Karanganyar</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #38bdf8; border-color: #0284c7; height: 3px;"></div>
+          <span>Saluran Irigasi / Sungai</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #ffffff; border-color: #64748b; height: 4px;"></div>
+          <span>Jalan Utama Desa</span>
+        </div>
+      </div>
+
+      <!-- Coordinate bar -->
+      <div class="coord-bar">
+        <span>Sistem Koordinat: WGS84 / EPSG:4326 • Proyeksi Web Mercator EPSG:3857</span>
+        <span>Lat: -7.429144, Long: 109.241582 • Zoom Level: 14 • Skala 1:12.500</span>
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

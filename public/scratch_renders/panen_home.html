@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Panen Tanam — Mobile Android App</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 412px; height: 860px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f8fafc; color: #0f172a;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .app-bar {
+    padding: 38px 20px 16px; background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .app-name { font-size: 1.15rem; font-weight: 800; color: #166534; }
+  .content-scroll { flex: 1; padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; overflow: hidden; }
+  
+  .weather-card {
+    background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+    color: white; border-radius: 18px; padding: 18px;
+    box-shadow: 0 10px 20px -5px rgba(22, 101, 52, 0.28);
+  }
+  .weather-temp { font-size: 2rem; font-weight: 800; }
+  .weather-alert {
+    background: rgba(254, 240, 138, 0.2); border: 1px solid #fef08a;
+    color: #fef08a; padding: 6px 10px; border-radius: 8px;
+    font-size: 0.72rem; font-weight: 700; margin-top: 10px;
+  }
+
+  .scan-cta-card {
+    background: #ffffff; border: 2px dashed #22c55e; border-radius: 16px;
+    padding: 18px; text-align: center;
+  }
+  .scan-btn {
+    background: #166534; color: white; border: none;
+    padding: 12px 20px; border-radius: 12px; font-weight: 800;
+    font-size: 0.85rem; width: 100%; margin-top: 10px;
+  }
+
+  .plot-item {
+    background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px;
+    padding: 14px; display: flex; justify-content: space-between; align-items: center;
+  }
+  
+  .bottom-nav {
+    height: 64px; background: #ffffff; border-top: 1px solid #e2e8f0;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    align-items: center; text-align: center; font-size: 0.68rem; font-weight: 700; color: #64748b;
+  }
+  .nav-active { color: #166534; }
+</style>
+</head>
+<body>
+  <div class="app-bar">
+    <div>
+      <div style="font-size: 0.72rem; color: #64748b; font-weight: 600;">Wilayah Banyumas &bull; MT I</div>
+      <div class="app-name">🌾 Panen Tanam AI</div>
+    </div>
+    <div style="width: 36px; height: 36px; background: #f0fdf4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #166534; border: 1px solid #bbf7d0;">
+      PT
+    </div>
+  </div>
+
+  <div class="content-scroll">
+    <div class="weather-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 600; opacity: 0.9;">Kemranjen, Banyumas</div>
+          <div class="weather-temp">28°C</div>
+        </div>
+        <div style="font-size: 1.8rem;">⛅</div>
+      </div>
+      <div style="font-size: 0.75rem; opacity: 0.9;">Kelembaban: 88% &bull; Curah Hujan Tinggi</div>
+      <div class="weather-alert">⚠️ Peringatan Dini: Risiko Hawar Daun Tinggi</div>
+    </div>
+
+    <div class="scan-cta-card">
+      <div style="font-size: 1.8rem;">📸</div>
+      <div style="font-weight: 800; font-size: 0.92rem; color: #0f172a; margin-top: 4px;">Pindai Daun Padi dengan Kamera AI</div>
+      <div style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Deteksi otomatis Hawar Daun, Blas, dan Tungro</div>
+      <button class="scan-btn">Buka Kamera Pemindai</button>
+    </div>
+
+    <div style="font-weight: 800; font-size: 0.85rem; color: #0f172a;">Petak Lahan Aktif</div>
+    
+    <div class="plot-item">
+      <div>
+        <div style="font-weight: 800; font-size: 0.82rem; color: #0f172a;">Petak Sawah A (Ciherang)</div>
+        <div style="font-size: 0.72rem; color: #64748b;">Luas: 1.2 Hektar &bull; Umur: 45 HST</div>
+      </div>
+      <span style="background: #f0fdf4; color: #166534; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">✓ Sehat</span>
+    </div>
+
+    <div class="plot-item">
+      <div>
+        <div style="font-weight: 800; font-size: 0.82rem; color: #0f172a;">Petak Sawah B (Inpari 32)</div>
+        <div style="font-size: 0.72rem; color: #64748b;">Luas: 0.8 Hektar &bull; Umur: 38 HST</div>
+      </div>
+      <span style="background: #fef2f2; color: #b91c1c; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">Perlu Tindakan</span>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-active">Beranda</div>
+    <div>Pindai AI</div>
+    <div>Lahan Saya</div>
+    <div>Akun</div>
+  </div>
+</body>
+</html>
